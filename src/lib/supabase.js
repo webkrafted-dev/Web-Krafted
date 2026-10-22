@@ -17,7 +17,7 @@ export const supabase = isSupabaseConfigured
 
 export function requireSupabase() {
   if (!supabase) {
-    throw new Error("Supabase is not configured. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.");
+    throw new Error("Supabase is not configured. Set the VITE Supabase URL and anon key, or add the supported public Supabase integration variables in Vercel.");
   }
 
   return supabase;
