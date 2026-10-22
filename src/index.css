@@ -177,6 +177,58 @@
     will-change: transform;
   }
 
+  .concept-preview-window {
+    container: concept-preview / inline-size;
+  }
+
+  .concept-nav-links {
+    display: none;
+  }
+
+  .concept-menu-toggle {
+    display: inline-flex;
+  }
+
+  .concept-hero-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .concept-hero-photo {
+    position: relative;
+    min-height: 116px;
+    overflow: hidden;
+  }
+
+  @container concept-preview (min-width: 420px) {
+    .concept-nav-links {
+      display: flex;
+    }
+
+    .concept-menu-toggle {
+      display: none;
+    }
+
+    .concept-hero-split {
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    }
+
+    .concept-hero-photo {
+      min-height: 174px;
+    }
+  }
+
+  @container concept-preview (min-width: 580px) {
+    .concept-site-nav {
+      padding-right: clamp(12px, 3cqi, 24px);
+      padding-left: clamp(12px, 3cqi, 24px);
+    }
+
+    .concept-hero-photo {
+      min-height: 202px;
+    }
+  }
+
   .motion-cta {
     -webkit-tap-highlight-color: transparent;
     transition-property: transform, color, background-color, border-color, box-shadow;
