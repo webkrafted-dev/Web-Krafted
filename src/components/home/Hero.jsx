@@ -6,16 +6,17 @@ import { heroServices } from "@/data/services";
 
 export default function Hero() {
   return (
-    <section className="bg-navy">
-      <div className="shell pb-12 pt-14 sm:pt-16 lg:pb-14 lg:pt-20">
+    <section className="hero-surface bg-navy text-paper">
+      <div className="shell relative z-10 pb-14 pt-14 sm:pb-16 sm:pt-16 lg:pb-20 lg:pt-20">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
           <div>
             <span className="eyebrow text-lime">
               <span className="h-px w-8 bg-lime" aria-hidden="true" />
               Ideas. Websites. Real Impact.
             </span>
-            <h1 className="mt-6 font-heading text-[2.15rem] font-bold leading-[1.06] tracking-[-0.03em] text-paper sm:text-[2.9rem] lg:text-[3.6rem]">
-              Digital experiences, crafted to move businesses forward.
+            <h1 className="mt-6 max-w-[680px] font-heading text-[2.15rem] font-bold leading-[1.06] tracking-[-0.03em] text-paper sm:text-[2.9rem] lg:text-[3.6rem]">
+              Digital experiences, crafted to move{" "}
+              <span className="text-lime">businesses forward.</span>
             </h1>
             <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-mist sm:text-lg">
               Thoughtfully designed websites that help businesses communicate clearly, build trust, and

@@ -29,12 +29,18 @@ export default function ServicesGrid() {
             <Reveal key={service.slug} delay={index * 0.04} className="h-full">
               <Link
                 to={`/services#${service.slug}`}
-                className="group relative flex h-full flex-col rounded-xl border border-mist/70 bg-white p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-navy/25 hover:shadow-[0_18px_44px_-34px_rgba(11,31,59,0.5)]"
+                className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-mist/80 bg-white p-6 shadow-[0_12px_34px_-32px_rgba(11,31,59,0.65)] transition-all duration-300 hover:-translate-y-1 hover:border-navy/25 hover:shadow-[0_22px_48px_-34px_rgba(11,31,59,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-deep focus-visible:ring-offset-2"
               >
-                <span className="grid h-11 w-11 place-items-center rounded-lg bg-navy text-lime">
-                  <ServiceIcon name={service.icon} />
-                </span>
-                <h3 className="mt-5 font-heading text-lg font-semibold leading-snug tracking-tight text-navy">
+                <span aria-hidden="true" className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-lime transition-transform duration-300 group-hover:scale-x-100 group-focus-visible:scale-x-100" />
+                <div className="flex items-start justify-between">
+                  <span className="grid h-12 w-12 place-items-center rounded-xl border border-lime/15 bg-navy text-lime shadow-[0_8px_18px_-12px_rgba(11,31,59,0.8)]">
+                    <ServiceIcon name={service.icon} />
+                  </span>
+                  <span className="font-heading text-[11px] font-semibold tracking-[0.16em] text-charcoal/35">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <h3 className="mt-5 font-heading text-lg font-semibold leading-snug tracking-tight text-navy transition-colors group-hover:text-navy-soft">
                   {service.title}
                 </h3>
                 <p className="mt-2 flex-1 text-[15px] leading-relaxed text-charcoal/75">{service.oneLine}</p>
