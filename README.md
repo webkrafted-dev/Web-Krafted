@@ -34,11 +34,11 @@ Row Level Security policies in the schema permit public reads of published posts
 
 1. Push this project to a Git repository and import it into Vercel. Use the default Vite build command, `npm run build`, and output directory `dist`.
 2. Add `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` to Vercel so the frontend can connect to Supabase.
-3. Add `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` as server environment variables for the API functions. Keep the service-role key secret and do not prefix it with `VITE_`.
+3. Add `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` as server environment variables for the API functions. Keep the service-role key secret and do not prefix it with `VITE_`. The admin reply endpoint validates the signed-in user with the public Supabase key (it can use `VITE_SUPABASE_ANON_KEY` or `NEXT_PUBLIC_SUPABASE_ANON_KEY`, or a server-only `SUPABASE_ANON_KEY`).
 4. Set the production site URL in Supabase Auth's allowed redirect URLs. Add your Vercel preview URLs if you use preview deployments.
-5. Deploy. Vercel serves the frontend and `/api/submit-enquiry` and `/api/submit-message`; Supabase stores contact submissions and published posts.
+5. Deploy. Vercel serves the frontend and `/api/submit-enquiry`, `/api/submit-message`, and the admin-only `/api/send-reply`; Supabase stores contact submissions and published posts.
 
-Optional email notifications can be enabled by setting all three Vercel variables: `NOTIFICATION_EMAIL`, `RESEND_API_KEY`, and `RESEND_FROM_EMAIL`. The sender address must be verified with Resend. Submissions remain saved to Supabase if notification delivery is unavailable.
+Email notifications and admin replies require all three Vercel variables: `NOTIFICATION_EMAIL` (the owner inbox and reply-to address), `RESEND_API_KEY` (keep as a secret), and `RESEND_FROM_EMAIL` (a sender verified with Resend). New enquiries and quick messages notify the owner; the admin inbox can send a manual email reply to the address on the selected submission and then mark it Replied. Submissions remain saved to Supabase if notification delivery is unavailable.
 
 Vercel's CDN serves the site globally. Supabase keeps the durable database in the region selected for the project; database backup and retention options depend on the Supabase plan.
 

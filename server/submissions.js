@@ -80,6 +80,43 @@ async function notifyOwner(subject, lines) {
   }
 }
 
+function getBearerToken(req) {
+  const authorization = req.headers?.authorization || req.headers?.Authorization || "";
+  const match = typeof authorization === "string" ? authorization.match(/^Bearer\s+(.+)$/i) : null;
+  return match?.[1]?.trim() || "";
+}
+
+async function getAdminClient(req) {
+  const accessToken = getBearerToken(req);
+  if (!accessToken) return { error: { status: 401, message: "Please sign in to send a reply." } };
+  const url = process.env.SUPABASE_URL;
+  const anonKey = process.env.SUPABASE_ANON_KEY
+    || process.env.SUPABASE_PUBLISHABLE_KEY
+    || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    || process.env.VITE_SUPABASE_ANON_KEY;
+  if (!url || !anonKey || !process.env.SUPABASE_SERVICE_ROLE_KEY) {
+    return { error: { status: 503, message: "The reply service is not configured yet." } };
+  }
+
+  const authClient = createClient(url, anonKey, {
+    auth: { autoRefreshToken: false, persistSession: false },
+  });
+  const { data: authData, error: authError } = await authClient.auth.getUser(accessToken);
+  if (authError || !authData?.user) {
+    return { error: { status: 401, message: "Your sign-in has expired. Please sign in again." } };
+  }
+
+  const client = getServiceClient();
+  const { data: admin, error: adminError } = await client
+    .from("admins")
+    .select("user_id")
+    .eq("user_id", authData.user.id)
+    .maybeSingle();
+  if (adminError) throw new Error(`Admin membership check failed: ${adminError.message}`);
+  if (!admin) return { error: { status: 403, message: "This account is not authorized to send replies." } };
+  return { client };
+}
+
 async function saveSubmission(table, email, values, subject, lines) {
   const client = getServiceClient();
   const emailHash = createHash("sha256").update(email).digest("hex");
@@ -223,5 +260,73 @@ export async function handleMessage(req, res) {
     return res.status(result.status).json(result.body);
   } catch (error) {
     return handleError(res, error);
+  }
+}
+
+export async function handleReply(req, res) {
+  if (req.method !== "POST") return methodNotAllowed(res);
+  const payload = getPayload(req);
+  if (!payload) return res.status(400).json({ ok: false, error: "Invalid request body." });
+
+  const table = cleanText(payload.table, 16);
+  const id = cleanText(payload.id, 64);
+  const subject = cleanText(payload.subject, 140);
+  const message = cleanMultiline(payload.message, 8000);
+  const errors = {};
+  if (table !== "enquiries" && table !== "messages") errors.table = "Choose a valid inbox item.";
+  if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)) errors.id = "Choose a valid inbox item.";
+  if (subject.length < 3) errors.subject = "Add an email subject.";
+  if (message.length < 1) errors.message = "Write a reply before sending.";
+  if (Object.keys(errors).length) return res.status(400).json({ ok: false, errors });
+
+  const recipient = process.env.NOTIFICATION_EMAIL;
+  const apiKey = process.env.RESEND_API_KEY;
+  const from = process.env.RESEND_FROM_EMAIL;
+  if (!recipient || !apiKey || !from) {
+    return res.status(503).json({ ok: false, error: "Email replies are not configured yet." });
+  }
+
+  try {
+    const authorization = await getAdminClient(req);
+    if (authorization.error) {
+      return res.status(authorization.error.status).json({ ok: false, error: authorization.error.message });
+    }
+    const { client } = authorization;
+    const { data: submission, error: submissionError } = await client
+      .from(table)
+      .select("id, name, email")
+      .eq("id", id)
+      .maybeSingle();
+    if (submissionError) throw new Error(`Could not load inbox item: ${submissionError.message}`);
+    if (!submission || !validEmail(submission.email)) {
+      return res.status(404).json({ ok: false, error: "That inbox item could not be found." });
+    }
+
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from,
+        to: [submission.email],
+        reply_to: recipient,
+        subject,
+        text: `Hi ${submission.name},\n\n${message}\n\n— WK Studios`,
+      }),
+    });
+    if (!response.ok) {
+      const details = await response.text();
+      console.error("Resend reply failed:", response.status, details.slice(0, 500));
+      return res.status(502).json({ ok: false, error: "The email provider could not send the reply. Please try again." });
+    }
+
+    const { error: statusError } = await client.from(table).update({ status: "Replied" }).eq("id", id);
+    if (statusError) console.error("Reply sent, but the inbox status could not be updated:", statusError.message);
+    return res.status(200).json({ ok: true, statusUpdated: !statusError });
+  } catch (error) {
+    console.error("Admin email reply failed:", error.message);
+    return res.status(503).json({ ok: false, error: "The reply could not be sent. Please try again." });
   }
 }
