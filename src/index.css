@@ -95,10 +95,12 @@
     color: #1F2937;
     font-size: 17px;
     line-height: 1.65;
+    font-weight: 400;
   }
 
   h1, h2, h3, h4 {
     @apply font-heading;
+    font-weight: 600;
   }
 
   ::selection {
