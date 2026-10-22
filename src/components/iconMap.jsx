@@ -19,6 +19,9 @@ import {
   Layers,
   Smartphone,
   Mail,
+  UserRound,
+  Link2,
+  CalendarDays,
 } from "lucide-react";
 
 export const iconMap = {
@@ -42,4 +45,7 @@ export const iconMap = {
   Layers,
   Smartphone,
   Mail,
+  UserRound,
+  Link2,
+  CalendarDays,
 };

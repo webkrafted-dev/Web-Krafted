@@ -33,7 +33,7 @@ export default function PricingSection() {
           <SectionHeading
             eyebrow="Launch pricing"
             title="A clear price menu"
-            description="Four starting ranges, with the scope matched to the work. Compare what each package is designed to cover."
+            description="Choose by scope, not by client type: a link-in-bio page, portfolio, community site, or business website can all fit these ranges."
           />
           <p className="pb-1 font-heading text-[11px] font-semibold uppercase tracking-[0.15em] text-charcoal/55">
             Prices in USD · one-time unless marked monthly

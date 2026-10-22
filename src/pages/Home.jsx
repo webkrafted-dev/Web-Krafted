@@ -14,7 +14,7 @@ import { isSupabaseConfigured, supabase } from "@/lib/supabase";
 export default function Home() {
   usePageMeta(
     "WK Web Krafted Studios — Web design & development",
-    "Thoughtfully designed websites that help businesses communicate clearly, build trust, and grow online. Custom sites, landing pages, e-commerce, and web apps."
+    "Thoughtfully designed websites for businesses, creators, individuals, clubs, and communities. Business sites, portfolios, creator link pages, events, e-commerce, and custom web apps."
   );
 
   const [posts, setPosts] = useState(isSupabaseConfigured ? [] : insightsSeed);

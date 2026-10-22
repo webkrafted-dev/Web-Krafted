@@ -9,7 +9,7 @@ import FinalCta from "@/components/home/FinalCta";
 export default function Pricing() {
   usePageMeta(
     "Website pricing — WK Web Krafted Studios",
-    "Explore one-time USD launch pricing: landing pages $50–$150, business websites $150–$350, premium websites $350–$700+, and custom websites or web apps $500–$1,500+."
+    "Explore one-time USD launch pricing for business websites, personal portfolios, creator link pages, community and leisure sites, shops, and web apps. Prices start at $50."
   );
 
   return (
@@ -17,7 +17,7 @@ export default function Pricing() {
       <PageHeader
         eyebrow="Launch pricing · USD"
         title="Four clear starting ranges. Scope matched to your goals."
-        description="Landing pages from $50, business websites from $150, premium websites from $350, and custom websites or web apps from $500. All project fees are one-time unless marked monthly."
+        description="Business sites remain central, alongside personal portfolios, creator link pages, club and leisure sites, shops, and more. Choose by project scope. All project fees are one-time unless marked monthly."
       >
         <div className="mt-6 flex flex-wrap items-center gap-3">
           <a

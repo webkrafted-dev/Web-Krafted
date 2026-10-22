@@ -25,7 +25,7 @@ const approach = [
 const clientSteps = [
   {
     title: "Discovery",
-    text: "We start with your goals, your audience, and the requirements that matter. No assumptions about what your business needs.",
+    text: "We start with your idea, your audience, and the requirements that matter. No assumptions about what you or your project needs.",
   },
   {
     title: "Clear scope",
@@ -52,7 +52,7 @@ export default function About() {
       <PageHeader
         eyebrow="About"
         title="Thoughtful work, clear process, no guesswork"
-        description="WK Web Krafted Studios helps businesses and organisations turn what they do into a useful, credible online experience. The process is collaborative, the scope is written down, and the finished site belongs to you."
+        description="WK Web Krafted Studios helps businesses, individuals, creators, clubs, and organisations turn their ideas into useful online experiences. The process is collaborative, the scope is written down, and the finished site belongs to you."
       />
 
       <section className="section bg-paper">

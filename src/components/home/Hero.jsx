@@ -18,7 +18,7 @@ export default function Hero() {
               Ideas. Websites. Real Impact.
             </span>
             <motion.h1
-              aria-label="Digital experiences, crafted to move businesses forward."
+              aria-label="Digital experiences, built around your next idea."
               initial={prefersReducedMotion ? false : "hidden"}
               animate="visible"
               variants={{
@@ -29,8 +29,8 @@ export default function Hero() {
             >
               {[
                 { text: "Digital experiences,", className: "text-paper" },
-                { text: "crafted to move", className: "text-paper" },
-                { text: "businesses forward.", className: "text-lime" },
+                { text: "built around", className: "text-paper" },
+                { text: "your next idea.", className: "text-lime" },
               ].map((line) => (
                 <span key={line.text} className="block overflow-hidden pb-[0.04em]" aria-hidden="true">
                   <motion.span
@@ -50,8 +50,7 @@ export default function Hero() {
               ))}
             </motion.h1>
             <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-mist sm:text-lg">
-              Thoughtfully designed websites that help businesses communicate clearly, build trust, and
-              grow online.
+              From business websites and online shops to portfolios, creator link pages, clubs, and event sites, we build around the people and purpose behind each idea.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
               <CTA to="/contact" icon={<ArrowRight className="h-4 w-4" aria-hidden="true" />}>

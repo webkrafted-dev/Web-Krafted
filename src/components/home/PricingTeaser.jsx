@@ -14,7 +14,7 @@ export default function PricingTeaser() {
           <SectionHeading
             eyebrow="Launch pricing · USD"
             title="Clear ranges. No guesswork."
-            description="Four one-time starting ranges, with the final scope agreed around your needs."
+            description="From creator link pages and personal portfolios to business and community sites, choose a one-time range by the scope you need."
           />
           <Link
             to="/pricing"

@@ -1,6 +1,11 @@
 export const PROJECT_TYPES = [
-  "Landing page",
   "Business website",
+  "Landing page",
+  "Personal or portfolio website",
+  "Creator or link-in-bio page",
+  "Community, club, or event website",
+  "Multi-page website",
+  "Website design",
   "Premium website",
   "Custom website / web app",
   "E-commerce website",

@@ -2,13 +2,13 @@ export const services = [
   {
     slug: "website-design-development",
     title: "Website Design & Development",
-    short: "Websites",
+    short: "Custom websites",
     icon: "PenTool",
-    oneLine: "Custom sites built around your goals, your brand, content, and audience.",
+    oneLine: "A custom website shaped around your goals—whether it represents a business, a community, or a personal idea.",
     whoFor:
-      "Businesses that need a website designed from scratch, or an existing site that no longer reflects the quality of the work behind it.",
+      "Businesses, individuals, creators, and organisations that need a clear, useful site designed from scratch or a thoughtful redesign.",
     problem:
-      "Template sites often look like everyone else's and make it hard for visitors to understand what you actually do. We start with your goals, then design the structure and visuals around them.",
+      "A generic template can struggle to explain why a site matters. We shape the content, structure, and visuals around its audience and purpose.",
     included: [
       "Discovery conversation to agree goals and structure",
       "Custom page layouts designed for your content",
@@ -16,21 +16,20 @@ export const services = [
       "Contact and enquiry forms that work",
       "Basic on-page SEO setup and a fast, lightweight build",
     ],
-    scope:
-      "A 3–5-page business website is a common starting point. Larger sites and extensive product or service catalogues are scoped separately.",
-    timeline: "About 2–3 weeks for a typical small business site",
-    projectType: "Business website",
+    scope: "From focused one-page sites to multi-page builds; the pages and features are agreed in writing for each project.",
+    timeline: "Agreed in the written project scope",
+    projectType: "Website design",
   },
   {
     slug: "landing-pages",
     title: "Landing Pages",
     short: "Landing pages",
     icon: "MousePointerClick",
-    oneLine: "Focused pages built to promote one offer and generate enquiries.",
+    oneLine: "A single focused page for a launch, creator link hub, event, campaign, product, or service.",
     whoFor:
-      "Anyone running a promotion, campaign, event, or launch who needs one clear page rather than a whole website.",
+      "Anyone who wants one clear page: a creator bio and link page, event information, campaign, personal introduction, or offer.",
     problem:
-      "A busy homepage asks visitors to figure things out. A landing page makes one offer obvious and gives people a single, simple next step.",
+      "A busy site can ask visitors to figure things out. A focused landing page gives one idea or call-to-action room to stand out.",
     included: [
       "One scrolling page",
       "Responsive mobile design",
@@ -42,34 +41,94 @@ export const services = [
     projectType: "Landing page",
   },
   {
-    slug: "business-websites",
-    title: "Business Websites",
-    short: "Business websites",
-    icon: "LayoutTemplate",
-    oneLine: "Multi-page sites that explain your services, build trust, and make contact easy.",
+    slug: "personal-portfolio-sites",
+    title: "Personal & Portfolio Websites",
+    short: "Personal & portfolio sites",
+    icon: "UserRound",
+    oneLine: "A home online for your work, interests, experience, and the projects you want people to discover.",
     whoFor:
-      "Established businesses, professional practices, clubs, and organisations that need a clear, credible online home.",
+      "Artists, freelancers, students, hobbyists, job seekers, and anyone building a personal or creative presence online.",
     problem:
-      "People check you online before they call. If your site is thin, outdated, or confusing, you lose enquiries you never hear about.",
+      "Social profiles are busy and borrowed space. A personal website puts your work, story, and contact details in one place you control.",
+    included: [
+      "Personal introduction and about section",
+      "Portfolio, gallery, or selected projects",
+      "Social links and a clear contact option",
+      "Responsive mobile-first layout",
+    ],
+    scope: "From a compact one-page profile to a multi-page portfolio, shaped around the work and content you want to show.",
+    timeline: "Agreed in the written project scope",
+    projectType: "Personal or portfolio website",
+  },
+  {
+    slug: "creator-link-pages",
+    title: "Creator & Link-in-Bio Pages",
+    short: "Creator link pages",
+    icon: "Link2",
+    oneLine: "A custom, mobile-friendly home for your social links, latest work, bookings, and featured content.",
+    whoFor:
+      "Creators, artists, musicians, streamers, coaches, and independent professionals who want one useful link to share.",
+    problem:
+      "Profiles often offer only a small space for links. A purpose-built page brings your channels, projects, and next steps together in your own style.",
+    included: [
+      "Short bio and personal brand styling",
+      "Social, newsletter, and featured links",
+      "Space for projects, bookings, or a featured offer",
+      "Responsive design focused on mobile visitors",
+    ],
+    scope: "Usually one fast-loading page. Any external services or integrations are agreed before work begins.",
+    timeline: "Agreed in the written project scope",
+    projectType: "Creator or link-in-bio page",
+  },
+  {
+    slug: "community-event-sites",
+    title: "Community, Club & Event Websites",
+    short: "Community & event sites",
+    icon: "CalendarDays",
+    oneLine: "Helpful online hubs for clubs, hobby groups, events, leisure activities, and local communities.",
+    whoFor:
+      "Sports and social clubs, event organisers, nonprofits, activity groups, and people bringing a community together.",
+    problem:
+      "Updates scattered across posts and chats are easy to miss. A shared website keeps essential details, schedules, and ways to join together.",
+    included: [
+      "Event details, schedules, or recurring activities",
+      "Clear joining, RSVP, or contact information",
+      "Space for updates, galleries, or team information",
+      "Responsive pages that work well on phones",
+    ],
+    scope: "From a one-page event guide to a multi-page club or community site, based on what participants need.",
+    timeline: "Agreed in the written project scope",
+    projectType: "Community, club, or event website",
+  },
+  {
+    slug: "business-websites",
+    title: "Multi-page Websites",
+    short: "Multi-page sites",
+    icon: "LayoutTemplate",
+    oneLine: "A clear set of pages for businesses, professionals, creators, clubs, and organisations.",
+    whoFor:
+      "Local businesses and service providers remain a core audience, alongside creators, clubs, and community groups that need several pages.",
+    problem:
+      "Visitors need to quickly understand who you are, what you offer, and where to go next. Clear page structure makes that easier for any kind of project.",
     included: [
       "Around 3–5 pages",
-      "Home, About, Services, Contact",
+      "Home, About, Services, Contact, or equivalent pages for your project",
       "Custom styling and responsive layouts",
       "Basic SEO and contact forms",
     ],
     scope: "Around 3–5 pages for the launch package. Additional pages and large product or service catalogues are scoped separately.",
     timeline: "About 7–10 business days",
-    projectType: "Business website",
+    projectType: "Multi-page website",
   },
   {
     slug: "ecommerce-websites",
     title: "E-commerce Websites",
     short: "E-commerce",
     icon: "ShoppingBag",
-    oneLine: "Storefronts with product pages, cart, and suitable payment integrations.",
-    whoFor: "Retailers, makers, and small brands ready to sell online or move off social media DMs.",
+    oneLine: "Online storefronts for products, creative work, tickets, and more—with suitable payment integrations.",
+    whoFor: "Independent sellers, makers, artists, and organisations ready to sell online or move beyond social media DMs.",
     problem:
-      "Selling through messages works until it doesn't. A storefront keeps product information, stock, and payment in one place.",
+      "Selling through messages can become difficult to manage. A storefront brings product details, checkout, and customer information together.",
     included: [
       "Storefront and product page design",
       "Product listing and detail layouts",
@@ -89,9 +148,9 @@ export const services = [
     icon: "Boxes",
     oneLine: "Interactive browser-based tools, scoped carefully from the start.",
     whoFor:
-      "Businesses that need more than a brochure site: booking flows, dashboards, member areas, internal tools, or custom calculators.",
+      "Businesses, clubs, and individuals who need more than a brochure site: booking flows, dashboards, member areas, or custom calculators.",
     problem:
-      "Off-the-shelf software rarely fits how you actually work. A small, focused application can remove spreadsheets and manual steps.",
+      "Off-the-shelf software may not fit a specific workflow. A focused application can make bookings, coordination, or everyday tasks simpler.",
     included: [
       "Requirements and feature scoping session",
       "Interface design for the core flows",
@@ -111,9 +170,9 @@ export const services = [
     icon: "Wrench",
     oneLine: "Clearer user flows and interfaces, plus ongoing updates and support.",
     whoFor:
-      "Businesses with a site that works but feels confusing, and anyone who wants someone dependable to keep it updated.",
+      "Anyone with a site that feels confusing or outdated, and businesses, creators, or groups that want someone dependable to keep it updated.",
     problem:
-      "Small friction points add up: unclear menus, cramped mobile layouts, forms that lose people. And sites drift out of date without regular care.",
+      "Small friction points add up: unclear menus, cramped mobile layouts, or forms that lose people. Sites can also drift out of date without regular care.",
     included: [
       "Review of your current pages and user flows",
       "Wireframes and interface improvements",
@@ -131,8 +190,8 @@ export const services = [
 export const heroServices = [
   { label: "Business Websites", icon: "LayoutTemplate" },
   { label: "Landing Pages", icon: "MousePointerClick" },
+  { label: "Personal & Portfolios", icon: "UserRound" },
+  { label: "Creator Link Pages", icon: "Link2" },
+  { label: "Community & Events", icon: "CalendarDays" },
   { label: "E-commerce", icon: "ShoppingBag" },
-  { label: "Web Apps", icon: "Boxes" },
-  { label: "UI/UX Design", icon: "PenTool" },
-  { label: "Maintenance", icon: "Wrench" },
 ];

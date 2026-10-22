@@ -27,7 +27,7 @@ const steps = [
 export default function Contact() {
   usePageMeta(
     "Start a project — WK Web Krafted Studios",
-    "Tell us about your project and we'll reply with a clear next step. Websites, landing pages, e-commerce, and web applications."
+    "Tell us about your business, portfolio, creator page, club, event, or personal project, and we'll reply with a clear next step."
   );
 
   const [params] = useSearchParams();
@@ -56,7 +56,7 @@ export default function Contact() {
     const next = {};
     if (form.name.trim().length < 2) next.name = "Please enter your name.";
     if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(form.email.trim())) {
-      next.email = "Please enter a valid email address, for example name@business.com.";
+      next.email = "Please enter a valid email address, for example name@example.com.";
     }
     if (form.description.trim().length < 20) {
       next.description = "Please describe your project in at least 20 characters — a sentence or two is plenty.";
@@ -206,7 +206,7 @@ export default function Contact() {
                     />
                     <TextField
                       id="business"
-                      label="Business or organization"
+                      label="Business, group, or project name"
                       value={form.business}
                       onChange={update("business")}
                       error={errors.business}

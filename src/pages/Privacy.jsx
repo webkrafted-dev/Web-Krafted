@@ -31,7 +31,7 @@ export default function Privacy() {
               <ul className="mt-3 list-disc space-y-1.5 pl-5">
                 <li>Your name</li>
                 <li>Your email address</li>
-                <li>Your business or organisation name, if you choose to share it</li>
+                <li>A business, organisation, group, or project name, if you choose to share it</li>
                 <li>The project details you type, including any budget range or deadline you select</li>
               </ul>
               <p className="mt-3">

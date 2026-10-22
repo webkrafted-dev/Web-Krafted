@@ -2,8 +2,15 @@ import { createHash } from "node:crypto";
 import { createClient } from "@supabase/supabase-js";
 
 const projectTypes = [
-  "Landing page",
   "Business website",
+  "Landing page",
+  "Personal or portfolio website",
+  "Creator or link-in-bio page",
+  "Community, club, or event website",
+  "Multi-page website",
+  "Website design",
+  "Premium website",
+  "Custom website / web app",
   "E-commerce website",
   "Web application",
   "UI/UX design",
@@ -11,7 +18,7 @@ const projectTypes = [
   "Not sure yet",
 ];
 
-const budgets = ["Under $150", "$150–$350", "$350–$700", "$700+", "Not sure yet"];
+const budgets = ["Under $150", "$150–$350", "$350–$700", "$700–$1,500", "$1,500+", "Not sure yet"];
 
 function cleanText(value, maxLength) {
   return typeof value === "string" ? value.replace(/\s+/g, " ").trim().slice(0, maxLength) : "";

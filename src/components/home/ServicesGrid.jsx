@@ -12,14 +12,14 @@ export default function ServicesGrid() {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
             eyebrow="Services"
-            title="What we build"
-            description="Six focused services. Every project starts with a conversation about what your business actually needs."
+            title="What would you like to put online?"
+            description="Business websites remain a big part of our work—alongside personal portfolios, creator link pages, clubs, community and event sites, leisure projects, online shops, and custom apps."
           />
           <Link
             to="/services"
             className="inline-flex items-center gap-1.5 border-b border-navy/20 pb-1 font-heading text-sm font-semibold text-navy transition-colors hover:border-navy"
           >
-            All services & pricing
+            Explore services
             <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>

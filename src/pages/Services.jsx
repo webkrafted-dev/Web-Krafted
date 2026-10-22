@@ -9,15 +9,15 @@ import { services } from "@/data/services";
 export default function Services() {
   usePageMeta(
     "Services & pricing — WK Web Krafted Studios",
-    "Website design and development, landing pages, business websites, e-commerce, web applications, UI/UX design, and maintenance. Clear, indicative pricing."
+    "Business websites, personal portfolios, creator link pages, community and event sites, e-commerce, web apps, and ongoing care. Clear launch pricing for different project types."
   );
 
   return (
     <>
       <PageHeader
         eyebrow="Services"
-        title="Websites designed around how your business actually works"
-        description="We design and build websites for organisations of every shape: a restaurant, a retailer, a consultancy, a club, a nonprofit, a creator, or a small team with a big idea. Whatever the business, the work starts the same way — understanding what you need to say, to whom, and what should happen next."
+        title="Websites for businesses, personal projects, and everything between"
+        description="Business websites remain a key part of our work. We also build personal portfolios, creator link pages, club and community sites, event and leisure pages, shops, and custom web apps—shaped around each project's purpose and audience."
       />
 
       <div className="bg-paper">
