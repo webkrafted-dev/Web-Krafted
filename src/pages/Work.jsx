@@ -3,11 +3,12 @@ import PageHeader from "@/components/PageHeader";
 import WorkRow from "@/components/work/WorkRow";
 import FinalCta from "@/components/home/FinalCta";
 import { projects } from "@/data/projects";
+import ConcavePreviewGallery from "@/components/work/ConcavePreviewGallery";
 
 export default function Work() {
   usePageMeta(
     "Work — WK Web Krafted Studios",
-    "Three concept projects demonstrating our design and development approach: a sports academy, a restaurant, and a consulting firm."
+    "Five fictional website concepts demonstrating our approach across small business, creators, portfolios, sports clubs, professional services, and community events."
   );
 
   return (
@@ -22,13 +23,15 @@ export default function Work() {
         <div className="shell">
           <div className="mb-10 rounded-xl border border-navy/10 bg-white p-5 sm:p-6">
             <p className="text-[14px] leading-relaxed text-charcoal/75">
-              <span className="font-heading font-semibold text-navy">A note on these projects.</span> Summit
-              Sports Academy, Ember &amp; Oak, and Northline Consulting are fictional brands. Each site was
-              designed and built by WK Studios as a demonstration of approach, layout, and front-end craft —
-              not as client commissions. There are no client quotes, results, or metrics here, because there
-              are no clients behind these concepts.
+              <span className="font-heading font-semibold text-navy">A note on these concepts.</span> Summit
+              Sports Academy, Ember &amp; Oak, Northline Consulting, Lena Rowe, and Fieldnote Market are
+              fictional brands spanning business, creator, portfolio, club, and community-event websites.
+              Each demonstration is designed and built by WK Studios — not commissioned client work. There
+              are no client quotes, results, or metrics because there are no clients behind these concepts.
             </p>
           </div>
+
+          <ConcavePreviewGallery />
 
           {projects.map((project, index) => (
             <WorkRow key={project.slug} project={project} index={index} />

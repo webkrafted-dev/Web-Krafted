@@ -77,4 +77,56 @@ export const projects = [
     ],
     features: ["Consulting service pages", "Clear enquiry path", "Insight-ready content structure", "Responsive layouts"],
   },
+  {
+    slug: "lena-rowe-portfolio",
+    name: "Lena Rowe — Photography",
+    category: "Creator & Portfolio",
+    tagline: "An editorial portfolio that gives selected work the space it deserves.",
+    mockup: "creator",
+    summary:
+      "A fictional independent-photographer concept, designed to put the images first while making it easy to understand the practice and enquire about a collaboration.",
+    objective:
+      "Give a visual creative a portfolio that makes selected work the focus, supports a clear personal point of view, and offers a straightforward route to new commissions.",
+    audience:
+      "Art directors, potential collaborators, portrait clients, and visitors exploring the photographer’s personal projects.",
+    design: [
+      "An editorial typographic system gives the portfolio a recognisable voice without competing with the work.",
+      "People, place, and project groupings make a growing body of work easier to browse.",
+      "The initial screen balances a concise introduction, one clear action, and a strong image.",
+      "Warm neutrals and restrained accent colour let the photography lead.",
+    ],
+    development: [
+      "Responsive project grids and image-led case-study layouts.",
+      "Reusable project entries for future collections and journal notes.",
+      "A concise contact path that works cleanly on mobile.",
+      "Semantic page structure and descriptive image text for accessibility.",
+    ],
+    features: ["Selected-work portfolio", "Creator biography", "Project and journal structure", "Collaboration enquiries"],
+  },
+  {
+    slug: "fieldnote-market",
+    name: "Fieldnote Market",
+    category: "Events & Community",
+    tagline: "A community market home for dates, makers, and ways to get involved.",
+    mockup: "market",
+    summary:
+      "A fictional neighbourhood makers-market concept, designed to help visitors plan a trip and help independent vendors feel part of a welcoming local community.",
+    objective:
+      "Create one useful, inviting home for market dates, maker profiles, visitor details, and community participation—without burying practical information under promotion.",
+    audience:
+      "Local visitors planning a weekend outing, independent makers considering a stall, and neighbours looking for ways to volunteer or take part.",
+    design: [
+      "A warm, locally grounded visual direction makes the event feel open and approachable.",
+      "Dates, opening hours, and visitor information remain easy to find at every screen size.",
+      "Maker profiles give the market a human voice and help visitors discover who will be there.",
+      "A reusable event layout can support seasonal dates without rebuilding the page.",
+    ],
+    development: [
+      "Responsive layouts for market schedules, maker profiles, and event updates.",
+      "Clear visitor-information sections for maps, access, and travel planning.",
+      "Simple enquiry paths for makers, volunteers, and community partners.",
+      "Accessible links, headings, and mobile-first content hierarchy.",
+    ],
+    features: ["Event dates and hours", "Maker profiles", "Visitor guide and location", "Vendor and volunteer enquiries"],
+  },
 ];

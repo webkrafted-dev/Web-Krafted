@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import CTA from "@/components/CTA";
 import HeroVisual from "@/components/home/HeroVisual";
 import ServiceIcon from "@/components/ServiceIcon";
+import GlyphLotteryText from "@/components/brand/GlyphLotteryText";
 import { heroServices } from "@/data/services";
 
 export default function Hero() {
@@ -44,7 +45,7 @@ export default function Hero() {
                       },
                     }}
                   >
-                    {line.text}
+                    {line.text === "your next idea." ? <GlyphLotteryText text={line.text} /> : line.text}
                   </motion.span>
                 </span>
               ))}

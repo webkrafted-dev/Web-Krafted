@@ -42,6 +42,20 @@ Email notifications and admin replies require all three Vercel variables: `NOTIF
 
 Vercel's CDN serves the site globally. Supabase keeps the durable database in the region selected for the project; database backup and retention options depend on the Supabase plan.
 
+## Motion components
+
+- `src/components/brand/GlyphLotteryText.jsx` adds a staggered slot-glyph reveal to the highlighted hero phrase; it respects reduced-motion preferences.
+- `src/components/brand/OrbitalTextGlobe.jsx` adds the navy/lime orbital wordmark illustration, gentle rotation, pause/resume, and pointer/touch/keyboard spin controls.
+- `src/components/work/ConcavePreviewGallery.jsx` presents five distinct website previews in a responsive curved carousel with swipe, drag, arrow-key, and button navigation.
+
+These are local Framer Motion implementations, not copied or installed React Bits Pro source. `components.json` is prepared with the official `@reactbits-starter` and `@reactbits-pro` registries and the environment-backed `Authorization: Bearer ${REACTBITS_LICENSE_KEY}` header. The Pro installer was not run because a license key was not supplied for this session. Keep a valid key only in the local environment; never commit it. When the key is available to the shell, the requested registry commands are:
+
+```bash
+npx shadcn@latest add @reactbits-starter/orbital-type-tw
+npx shadcn@latest add @reactbits-starter/concave-carousel-tw
+npx shadcn@latest add @reactbits-starter/glyph-lottery-tw
+```
+
 ## Checks
 
 - `npm run build`

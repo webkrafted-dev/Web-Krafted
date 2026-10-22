@@ -22,6 +22,20 @@ const concepts = {
     category: "professional services",
     brand: "Northline Consulting",
   },
+  creator: {
+    domain: "lenarowe.studio",
+    image: "/images/concepts/creator-studio.webp",
+    imagePosition: "object-[70%_47%]",
+    category: "creative portfolio",
+    brand: "Lena Rowe",
+  },
+  market: {
+    domain: "fieldnotemarket.org",
+    image: "/images/concepts/community-market.webp",
+    imagePosition: "object-[65%_48%]",
+    category: "community market and events",
+    brand: "Fieldnote Market",
+  },
 };
 
 function BrowserChrome({ domain }) {
@@ -224,6 +238,97 @@ function NorthlinePreview({ concept, priority }) {
   );
 }
 
+function CreatorPreview({ concept, priority }) {
+  return (
+    <div className="bg-[#f5f2ed] text-[#202a32]">
+      <div className="flex items-center justify-between bg-[#252c31] px-3 py-1.5 text-[8px] font-medium uppercase tracking-[0.16em] text-[#f5f2ed]">
+        <span>Independent photographer</span><span>Available for select projects</span>
+      </div>
+      <header className="concept-site-nav flex items-center justify-between gap-2 border-b border-[#e6e1d9] bg-[#fbfaf7] px-3 py-2.5">
+        <div className="min-w-0">
+          <span className="block truncate font-serif text-[15px] leading-none tracking-[-0.04em] text-[#202a32]">Lena Rowe</span>
+          <span className="mt-1 block font-heading text-[8px] font-medium uppercase tracking-[0.16em] text-[#7b827f]">Photographer &amp; image-maker</span>
+        </div>
+        <nav className="concept-nav-links items-center gap-3 font-heading text-[8px] text-[#535b5b]" aria-hidden="true">
+          <span>Selected work</span><span>About</span><span>Journal</span>
+        </nav>
+        <span className="shrink-0 border border-[#4e615d] px-2.5 py-1.5 font-heading text-[8px] font-semibold text-[#344541]">Make an enquiry</span>
+        <span className="concept-menu-toggle text-[#344541]" aria-hidden="true"><Menu className="h-4 w-4" /></span>
+      </header>
+
+      <main>
+        <section className="concept-hero-split bg-[#f5f2ed]">
+          <div className="flex flex-col justify-center px-4 py-4 sm:px-5">
+            <p className="font-heading text-[8px] font-semibold uppercase tracking-[0.18em] text-[#a15e47]">Portrait · Place · Everyday</p>
+            <h2 className="mt-2 max-w-[16ch] font-serif text-[20px] leading-[1.02] tracking-[-0.035em] text-[#202a32] sm:text-[25px]">
+              Images for the things that matter.
+            </h2>
+            <p className="mt-2 max-w-[34ch] text-[9px] leading-[1.6] text-[#626966]">
+              Thoughtful photographs for people, places and ideas with a story to tell.
+            </p>
+            <span className="mt-3 inline-flex w-fit items-center gap-1.5 bg-[#344541] px-2.5 py-1.5 font-heading text-[8px] font-semibold text-white">
+              Explore selected work <ArrowRight className="h-3 w-3" aria-hidden="true" />
+            </span>
+          </div>
+          <PreviewPhoto concept={concept} priority={priority} />
+        </section>
+        <section className="grid grid-cols-3 gap-2 border-t border-[#e6e1d9] bg-[#fbfaf7] px-3 py-2.5">
+          <div><p className="font-serif text-[10px] text-[#202a32]">People</p><p className="mt-0.5 text-[8px] text-[#747b77]">Portraits with room to breathe</p></div>
+          <div className="border-l border-[#e6e1d9] pl-2"><p className="font-serif text-[10px] text-[#202a32]">Places</p><p className="mt-0.5 text-[8px] text-[#747b77]">Details worth noticing</p></div>
+          <div className="border-l border-[#e6e1d9] pl-2"><p className="font-serif text-[10px] text-[#202a32]">Projects</p><p className="mt-0.5 text-[8px] text-[#747b77]">A considered archive</p></div>
+        </section>
+      </main>
+    </div>
+  );
+}
+
+function MarketPreview({ concept, priority }) {
+  return (
+    <div className="bg-[#f1f2e9] text-[#18382d]">
+      <div className="flex items-center justify-center gap-2 bg-[#d9e1c7] px-3 py-1.5 text-center font-heading text-[8px] font-semibold uppercase tracking-[0.14em] text-[#315641]">
+        <span>Next market</span><span aria-hidden="true">·</span><span>Saturday, 10am–3pm</span>
+      </div>
+      <header className="concept-site-nav flex items-center justify-between gap-2 border-b border-[#e3e5d8] bg-[#fbfaf4] px-3 py-2.5">
+        <div className="flex min-w-0 items-center gap-2">
+          <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#315641] font-serif text-[15px] text-[#f1f2e9]">F</span>
+          <span className="min-w-0 leading-none">
+            <span className="block truncate font-heading text-[9px] font-bold tracking-[0.14em] text-[#18382d]">FIELDNOTE</span>
+            <span className="mt-1 block truncate text-[8px] font-medium uppercase tracking-[0.13em] text-[#778174]">Local makers market</span>
+          </span>
+        </div>
+        <nav className="concept-nav-links items-center gap-3 font-heading text-[8px] text-[#49634f]" aria-hidden="true">
+          <span>Market dates</span><span>Makers</span><span>Our story</span>
+        </nav>
+        <span className="shrink-0 bg-[#315641] px-2.5 py-1.5 font-heading text-[8px] font-semibold text-white">Plan a visit</span>
+        <span className="concept-menu-toggle text-[#315641]" aria-hidden="true"><Menu className="h-4 w-4" /></span>
+      </header>
+
+      <main>
+        <section className="concept-hero-split bg-[#e8ecde]">
+          <div className="flex flex-col justify-center px-4 py-4 sm:px-5">
+            <p className="font-heading text-[8px] font-semibold uppercase tracking-[0.18em] text-[#9b6d33]">Good things, made close to home</p>
+            <h2 className="mt-2 max-w-[17ch] font-serif text-[20px] leading-[1.02] tracking-[-0.03em] text-[#18382d] sm:text-[25px]">
+              Local makers. Good things.
+            </h2>
+            <p className="mt-2 max-w-[34ch] text-[9px] leading-[1.6] text-[#586a59]">
+              Meet the independent makers, growers and neighbours behind the market.
+            </p>
+            <span className="mt-3 inline-flex w-fit items-center gap-1.5 bg-[#315641] px-2.5 py-1.5 font-heading text-[8px] font-semibold text-white">
+              See what’s on <ArrowRight className="h-3 w-3" aria-hidden="true" />
+            </span>
+          </div>
+          <PreviewPhoto concept={concept} priority={priority} />
+        </section>
+        <section className="grid grid-cols-3 gap-2 border-t border-[#e3e5d8] bg-[#fbfaf4] px-3 py-2.5">
+          <div><p className="font-heading text-[8px] font-semibold uppercase tracking-[0.1em] text-[#315641]">This weekend</p><p className="mt-0.5 text-[8px] text-[#778174]">Dates and opening hours</p></div>
+          <div className="border-l border-[#e3e5d8] pl-2"><p className="font-heading text-[8px] font-semibold uppercase tracking-[0.1em] text-[#315641]">The makers</p><p className="mt-0.5 text-[8px] text-[#778174]">Meet the local community</p></div>
+          <div className="border-l border-[#e3e5d8] pl-2"><p className="font-heading text-[8px] font-semibold uppercase tracking-[0.1em] text-[#315641]">Getting here</p><p className="mt-0.5 text-[8px] text-[#778174]">Map, access and parking</p></div>
+        </section>
+      </main>
+    </div>
+  );
+}
+
 export default function BrowserMockup({ variant = "sports", label = "", priority = false }) {
   const concept = concepts[variant] ?? concepts.sports;
   const imageLabel = label || `Fictional ${concept.category} website concept preview for ${concept.brand}`;
@@ -232,7 +337,8 @@ export default function BrowserMockup({ variant = "sports", label = "", priority
     <div
       role="img"
       aria-label={imageLabel}
-      className="group overflow-hidden rounded-xl border border-navy/15 bg-[#e6ebf0] p-1.5 shadow-[0_26px_60px_-32px_rgba(11,31,59,0.55)] sm:p-2"
+      className={`group overflow-hidden rounded-xl border border-navy/15 bg-[#e6ebf0] p-1.5 shadow-[0_26px_60px_-32px_rgba(11,31,59,0.55)] sm:p-2`}
+      data-concept={variant}
     >
       <div className="overflow-hidden rounded-lg border border-[#d9dee5] bg-white">
         <BrowserChrome domain={concept.domain} />
@@ -241,6 +347,10 @@ export default function BrowserMockup({ variant = "sports", label = "", priority
             <EmberPreview concept={concept} priority={priority} />
           ) : variant === "consulting" ? (
             <NorthlinePreview concept={concept} priority={priority} />
+          ) : variant === "creator" ? (
+            <CreatorPreview concept={concept} priority={priority} />
+          ) : variant === "market" ? (
+            <MarketPreview concept={concept} priority={priority} />
           ) : (
             <SummitPreview concept={concept} priority={priority} />
           )}
