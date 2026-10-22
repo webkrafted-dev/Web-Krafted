@@ -20,6 +20,7 @@ const About = lazy(() => import("@/pages/About"));
 const Contact = lazy(() => import("@/pages/Contact"));
 const Privacy = lazy(() => import("@/pages/Privacy"));
 const Terms = lazy(() => import("@/pages/Terms"));
+const TermsAndConditions = lazy(() => import("@/pages/TermsAndConditions"));
 const Admin = lazy(() => import("@/pages/Admin"));
 const AdminPosts = lazy(() => import("@/pages/AdminPosts"));
 const Login = lazy(() => import("@/pages/Login"));
@@ -66,6 +67,7 @@ function AuthenticatedApp() {
         <Route path="/contact" element={<RoutePage page={Contact} />} />
         <Route path="/privacy" element={<RoutePage page={Privacy} />} />
         <Route path="/terms" element={<RoutePage page={Terms} />} />
+        <Route path="/terms-and-conditions" element={<RoutePage page={TermsAndConditions} />} />
         <Route path="*" element={<NotFound />} />
       </Route>
       <Route element={<ProtectedRoute />}>

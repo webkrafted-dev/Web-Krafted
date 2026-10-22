@@ -36,6 +36,15 @@ export default function Pricing() {
       </PageHeader>
       <PricingSection />
       <PricingFaq />
+      <div className="bg-paper pb-8">
+        <div className="shell text-center text-[13px] text-charcoal/65">
+          Questions about milestones, invoices, or project handover?{" "}
+          <Link to="/terms-and-conditions" className="font-semibold text-navy underline decoration-lime decoration-2 underline-offset-4">
+            Read the Payment Policy &amp; Terms &amp; Conditions
+          </Link>
+          .
+        </div>
+      </div>
       <FinalCta />
     </>
   );

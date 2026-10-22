@@ -12,6 +12,7 @@ const exploreLinks = [
   { label: "Contact", to: "/contact" },
   { label: "Privacy Policy", to: "/privacy" },
   { label: "Terms of Use", to: "/terms" },
+  { label: "Payment Policy & Terms", to: "/terms-and-conditions" },
 ];
 const linkStyle = "inline-flex min-h-8 items-center text-sm text-mist transition-colors hover:text-lime";
 

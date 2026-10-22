@@ -55,6 +55,13 @@ export default function Terms() {
                 Sending an enquiry does not create a contract or reserve time in the studio's schedule. A
                 project begins only once a written scope is agreed and the initial payment has been received.
               </p>
+              <p className="mt-3">
+                For client project terms, milestone payments, revisions, and handover, see the separate{" "}
+                <Link to="/terms-and-conditions" className="font-semibold underline decoration-lime decoration-2 underline-offset-4">
+                  Payment Policy &amp; Terms &amp; Conditions
+                </Link>
+                .
+              </p>
             </div>
 
             <div>

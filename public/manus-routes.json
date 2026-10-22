@@ -11,6 +11,7 @@
     { "path": "/contact", "title": "Contact" },
     { "path": "/privacy", "title": "Privacy policy" },
     { "path": "/terms", "title": "Terms of use" },
+    { "path": "/terms-and-conditions", "title": "Payment Policy & Terms & Conditions" },
     { "path": "/admin", "title": "Admin" },
     { "path": "/admin/posts", "title": "Admin posts" },
     { "path": "/login", "title": "Log in" },
