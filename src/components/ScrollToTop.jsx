@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation, useNavigationType } from "react-router-dom";
 
 const getHashId = (hash) => {
@@ -14,15 +14,19 @@ const getHashId = (hash) => {
 export default function ScrollToTop() {
   const { pathname, hash } = useLocation();
   const navigationType = useNavigationType();
+  const previousPathname = useRef(pathname);
 
   useEffect(() => {
+    const pathChanged = previousPathname.current !== pathname;
+    previousPathname.current = pathname;
     if (navigationType === "POP") return;
 
     if (hash) {
       const id = getHashId(hash);
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const timer = window.setTimeout(() => {
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-      }, 50);
+        document.getElementById(id)?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth" });
+      }, pathChanged ? (reducedMotion ? 0 : 280) : 50);
       return () => window.clearTimeout(timer);
     }
 

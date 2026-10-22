@@ -15,7 +15,7 @@ export default function PricingTeaser() {
             description="Indicative starting estimates, so you can judge fit before a conversation. Every project is scoped individually."
           />
           <Link
-            to="/services#pricing"
+            to="/pricing"
             className="inline-flex items-center gap-1.5 border-b border-navy/20 pb-1 font-heading text-sm font-semibold text-navy transition-colors hover:border-navy"
           >
             Full pricing
@@ -44,7 +44,7 @@ export default function PricingTeaser() {
 
         <p className="mt-8 text-sm text-charcoal/60">
           Also available:{" "}
-          <Link to="/services#pricing" className="underline decoration-lime decoration-2 underline-offset-4">
+          <Link to="/pricing" className="underline decoration-lime decoration-2 underline-offset-4">
             website maintenance from $20 per month
           </Link>
           .

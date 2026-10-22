@@ -4,6 +4,7 @@
     { "path": "/work", "title": "Work" },
     { "path": "/work/:slug", "title": "Case study" },
     { "path": "/services", "title": "Services" },
+    { "path": "/pricing", "title": "Pricing" },
     { "path": "/insights", "title": "Insights" },
     { "path": "/insights/:slug", "title": "Insight article" },
     { "path": "/about", "title": "About" },

@@ -13,6 +13,7 @@ import NotFound from "@/pages/NotFound";
 const Work = lazy(() => import("@/pages/Work"));
 const CaseStudy = lazy(() => import("@/pages/CaseStudy"));
 const Services = lazy(() => import("@/pages/Services"));
+const Pricing = lazy(() => import("@/pages/Pricing"));
 const Insights = lazy(() => import("@/pages/Insights"));
 const InsightPost = lazy(() => import("@/pages/InsightPost"));
 const About = lazy(() => import("@/pages/About"));
@@ -58,6 +59,7 @@ function AuthenticatedApp() {
         <Route path="/work" element={<RoutePage page={Work} />} />
         <Route path="/work/:slug" element={<RoutePage page={CaseStudy} />} />
         <Route path="/services" element={<RoutePage page={Services} />} />
+        <Route path="/pricing" element={<RoutePage page={Pricing} />} />
         <Route path="/insights" element={<RoutePage page={Insights} />} />
         <Route path="/insights/:slug" element={<RoutePage page={InsightPost} />} />
         <Route path="/about" element={<RoutePage page={About} />} />

@@ -78,6 +78,7 @@ export default function HeroVisual() {
               <BrowserMockup
                 variant={activeProject.mockup}
                 label={`Illustrative ${activeProject.category.toLowerCase()} website concept for ${activeProject.name}. ${activeProject.tagline}`}
+                priority
               />
             </motion.div>
           </AnimatePresence>

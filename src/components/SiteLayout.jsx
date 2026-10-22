@@ -1,9 +1,13 @@
-import { Outlet } from "react-router-dom";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { Outlet, useLocation } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingMessage from "@/components/FloatingMessage";
 
 export default function SiteLayout() {
+  const { pathname } = useLocation();
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <div className="flex min-h-screen flex-col bg-paper">
       <a
@@ -14,7 +18,17 @@ export default function SiteLayout() {
       </a>
       <Header />
       <main id="main" className="flex-1">
-        <Outlet />
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={pathname}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 9, filter: "blur(2px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -5 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.22, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <Outlet />
+          </motion.div>
+        </AnimatePresence>
       </main>
       <FloatingMessage />
       <Footer />

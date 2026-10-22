@@ -70,7 +70,7 @@ export default function CaseStudy() {
         <div className="shell grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14">
           <BrowserMockup
             variant={project.mockup}
-            label={`Abstract layout preview for the ${project.name} concept project`}
+            label={`Illustrative ${project.category.toLowerCase()} website preview for the ${project.name} concept project`}
           />
           <div className="self-center">
             <span className="eyebrow text-charcoal/60">

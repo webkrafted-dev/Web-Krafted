@@ -2,12 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menu, X, ArrowUpRight } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 import Wordmark from "@/components/Wordmark";
 
 const nav = [
   { label: "Home", to: "/" },
   { label: "Work", to: "/work" },
   { label: "Services", to: "/services" },
+  { label: "Pricing", to: "/pricing" },
   { label: "Insights", to: "/insights" },
   { label: "About", to: "/about" },
   { label: "Contact", to: "/contact" },
@@ -16,6 +18,7 @@ const nav = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
   const { pathname } = useLocation();
   const panelRef = useRef(null);
   const toggleRef = useRef(null);
@@ -77,14 +80,14 @@ export default function Header() {
       <div className="shell flex h-[68px] items-center justify-between gap-6">
         <Wordmark />
 
-        <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
+        <nav aria-label="Main" className="hidden items-center gap-0 lg:flex">
           {nav.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               end={item.to === "/"}
               className={({ isActive }) =>
-                `relative rounded-md px-3.5 py-2 font-heading text-[13px] font-medium tracking-wide transition-colors duration-200 ${
+                `relative whitespace-nowrap rounded-md px-2.5 py-2 font-heading text-[13px] font-medium tracking-wide transition-colors duration-200 xl:px-3 ${
                   isActive ? "text-lime" : "text-mist hover:text-paper"
                 }`
               }
@@ -92,12 +95,14 @@ export default function Header() {
               {({ isActive }) => (
                 <>
                   {item.label}
-                  <span
-                    aria-hidden="true"
-                    className={`absolute inset-x-3.5 -bottom-0.5 h-px bg-lime transition-transform duration-200 ${
-                      isActive ? "scale-x-100" : "scale-x-0"
-                    }`}
-                  />
+                  {isActive && (
+                    <motion.span
+                      layoutId="primary-navigation-indicator"
+                      aria-hidden="true"
+                      className="absolute inset-x-2.5 -bottom-0.5 h-0.5 rounded-full bg-lime xl:inset-x-3"
+                      transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                    />
+                  )}
                 </>
               )}
             </NavLink>
@@ -129,13 +134,16 @@ export default function Header() {
 
       {open &&
         createPortal(
-        <div
+        <motion.div
           id="mobile-menu"
           ref={panelRef}
           role="dialog"
           aria-modal="true"
           aria-label="Site menu"
           className="fixed inset-0 z-50 flex flex-col bg-navy lg:hidden"
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: prefersReducedMotion ? 0 : 0.2, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="shell flex h-[68px] items-center justify-between">
             <Wordmark />
@@ -173,7 +181,7 @@ export default function Header() {
               Start a Project
             </Link>
           </nav>
-        </div>,
+        </motion.div>,
         document.body
       )}
     </header>

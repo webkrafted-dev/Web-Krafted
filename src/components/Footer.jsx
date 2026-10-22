@@ -7,6 +7,7 @@ import useInsightCategories from "@/hooks/useInsightCategories";
 
 const exploreLinks = [
   { label: "Home", to: "/" },
+  { label: "Pricing", to: "/pricing" },
   { label: "About", to: "/about" },
   { label: "Contact", to: "/contact" },
   { label: "Privacy Policy", to: "/privacy" },

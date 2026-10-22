@@ -5,7 +5,7 @@ export default function SectionHeading({
   tone = "light",
   align = "left",
   className = "",
-  children,
+  children = null,
 }) {
   const isDark = tone === "dark";
   return (
