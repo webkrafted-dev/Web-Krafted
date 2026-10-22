@@ -1,0 +1,20 @@
+{
+  "routes": [
+    { "path": "/", "title": "Home" },
+    { "path": "/work", "title": "Work" },
+    { "path": "/work/:slug", "title": "Case study" },
+    { "path": "/services", "title": "Services" },
+    { "path": "/insights", "title": "Insights" },
+    { "path": "/insights/:slug", "title": "Insight article" },
+    { "path": "/about", "title": "About" },
+    { "path": "/contact", "title": "Contact" },
+    { "path": "/privacy", "title": "Privacy policy" },
+    { "path": "/terms", "title": "Terms of use" },
+    { "path": "/admin", "title": "Admin" },
+    { "path": "/admin/posts", "title": "Admin posts" },
+    { "path": "/login", "title": "Log in" },
+    { "path": "/register", "title": "Register" },
+    { "path": "/forgot-password", "title": "Forgot password" },
+    { "path": "/reset-password", "title": "Reset password" }
+  ]
+}

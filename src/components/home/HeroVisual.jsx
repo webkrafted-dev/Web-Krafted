@@ -1,12 +1,36 @@
+import { useRef } from "react";
+
 export default function HeroVisual() {
+  const cardRef = useRef(null);
+
+  const handlePointerMove = (event) => {
+    if (event.pointerType !== "mouse" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const card = cardRef.current;
+    if (!card) return;
+    const bounds = card.getBoundingClientRect();
+    const x = Math.max(-1, Math.min(1, ((event.clientX - bounds.left) / bounds.width) * 2 - 1));
+    const y = Math.max(-1, Math.min(1, ((event.clientY - bounds.top) / bounds.height) * 2 - 1));
+    card.style.setProperty("--tilt-x", `${-y * 2.5}deg`);
+    card.style.setProperty("--tilt-y", `${x * 3.5}deg`);
+  };
+
+  const resetPointerTilt = () => {
+    cardRef.current?.style.setProperty("--tilt-x", "0deg");
+    cardRef.current?.style.setProperty("--tilt-y", "0deg");
+  };
+
   return (
-    <div className="relative mx-auto w-full max-w-[540px] lg:max-w-none">
+    <div
+      className="relative mx-auto w-full max-w-[540px] lg:max-w-none"
+      onPointerMove={handlePointerMove}
+      onPointerLeave={resetPointerTilt}
+    >
       <div
         className="absolute -left-4 top-10 hidden h-28 w-px bg-lime/70 sm:block"
         aria-hidden="true"
       />
 
-      <div className="rounded-2xl border border-white/10 bg-navy-soft p-2.5 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.85)]">
+      <div ref={cardRef} className="hero-browser-card rounded-2xl border border-white/10 bg-navy-soft p-2.5 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.85)]">
         <div className="overflow-hidden rounded-xl bg-paper">
           <div className="flex items-center gap-1.5 border-b border-mist/70 bg-white px-3 py-2">
             <span className="h-1.5 w-1.5 rounded-full bg-mist" aria-hidden="true" />

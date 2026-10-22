@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import usePageMeta from "@/hooks/usePageMeta";
 import PageHeader from "@/components/PageHeader";
@@ -37,8 +37,13 @@ function PostCard({ post }) {
 
 export default function Insights() {
   usePageMeta("Insights — WK Web Krafted Studios", "Practical ideas about websites, design, and building a stronger online presence.");
+  const [searchParams, setSearchParams] = useSearchParams();
   const [posts, setPosts] = useState(isSupabaseConfigured ? [] : insightsSeed);
   const [loading, setLoading] = useState(isSupabaseConfigured);
+  const categories = [...new Set(posts.map((post) => post.category).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+  const requestedCategory = searchParams.get("category");
+  const activeCategory = categories.includes(requestedCategory) ? requestedCategory : "All";
+  const visiblePosts = activeCategory === "All" ? posts : posts.filter((post) => post.category === activeCategory);
 
   useEffect(() => {
     if (!supabase) return undefined;
@@ -73,9 +78,39 @@ export default function Insights() {
           {loading ? (
             <p className="text-sm text-charcoal/60" role="status">Loading insights...</p>
           ) : posts.length ? (
-            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {posts.map((post) => <PostCard key={post.slug} post={post} />)}
-            </div>
+            <>
+              {categories.length > 0 && (
+                <div className="mb-8 flex flex-wrap items-center gap-2" role="group" aria-label="Filter insights by category">
+                  {["All", ...categories].map((category) => {
+                    const isActive = activeCategory === category;
+                    return (
+                      <button
+                        key={category}
+                        type="button"
+                        aria-pressed={isActive}
+                        onClick={() => setSearchParams(category === "All" ? {} : { category }, { replace: true })}
+                        className={`min-h-10 cursor-pointer rounded-full border px-4 py-2 font-heading text-xs font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-deep focus-visible:ring-offset-2 ${
+                          isActive
+                            ? "border-navy bg-navy text-paper"
+                            : "border-mist bg-white text-charcoal/70 hover:border-navy/30 hover:text-navy"
+                        }`}
+                      >
+                        {category}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+              <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3" aria-live="polite">
+                {visiblePosts.length ? (
+                  visiblePosts.map((post) => <PostCard key={post.slug} post={post} />)
+                ) : (
+                  <p className="rounded-xl border border-mist bg-white p-6 text-sm text-charcoal/65">
+                    There are no articles in this category yet.
+                  </p>
+                )}
+              </div>
+            </>
           ) : (
             <p className="rounded-xl border border-mist bg-white p-6 text-sm text-charcoal/65">
               There are no published insights yet. Check back soon.

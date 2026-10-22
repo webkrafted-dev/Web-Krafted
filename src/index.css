@@ -119,6 +119,10 @@
       animation-duration: 0.001ms !important;
       transition-duration: 0.001ms !important;
     }
+    .hero-browser-card {
+      transform: none !important;
+      will-change: auto;
+    }
   }
 }
 
@@ -162,5 +166,12 @@
     height: 1px;
     background: linear-gradient(90deg, transparent, rgba(184, 255, 59, 0.6), transparent);
     content: "";
+  }
+
+  .hero-browser-card {
+    transform: perspective(1200px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+    transform-style: preserve-3d;
+    transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    will-change: transform;
   }
 }

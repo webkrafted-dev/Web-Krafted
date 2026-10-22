@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClientInstance } from "@/lib/query-client";
@@ -7,22 +8,37 @@ import ScrollToTop from "@/components/ScrollToTop";
 import SiteLayout from "@/components/SiteLayout";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Home from "@/pages/Home";
-import Work from "@/pages/Work";
-import CaseStudy from "@/pages/CaseStudy";
-import Services from "@/pages/Services";
-import Insights from "@/pages/Insights";
-import InsightPost from "@/pages/InsightPost";
-import About from "@/pages/About";
-import Contact from "@/pages/Contact";
-import Privacy from "@/pages/Privacy";
-import Terms from "@/pages/Terms";
 import NotFound from "@/pages/NotFound";
-import Admin from "@/pages/Admin";
-import AdminPosts from "@/pages/AdminPosts";
-import Login from "@/pages/Login";
-import Register from "@/pages/Register";
-import ForgotPassword from "@/pages/ForgotPassword";
-import ResetPassword from "@/pages/ResetPassword";
+
+const Work = lazy(() => import("@/pages/Work"));
+const CaseStudy = lazy(() => import("@/pages/CaseStudy"));
+const Services = lazy(() => import("@/pages/Services"));
+const Insights = lazy(() => import("@/pages/Insights"));
+const InsightPost = lazy(() => import("@/pages/InsightPost"));
+const About = lazy(() => import("@/pages/About"));
+const Contact = lazy(() => import("@/pages/Contact"));
+const Privacy = lazy(() => import("@/pages/Privacy"));
+const Terms = lazy(() => import("@/pages/Terms"));
+const Admin = lazy(() => import("@/pages/Admin"));
+const AdminPosts = lazy(() => import("@/pages/AdminPosts"));
+const Login = lazy(() => import("@/pages/Login"));
+const Register = lazy(() => import("@/pages/Register"));
+const ForgotPassword = lazy(() => import("@/pages/ForgotPassword"));
+const ResetPassword = lazy(() => import("@/pages/ResetPassword"));
+
+function RoutePage({ page: Page }) {
+  return (
+    <Suspense
+      fallback={(
+        <div className="section" role="status">
+          <div className="shell text-sm text-charcoal/60">Loading page…</div>
+        </div>
+      )}
+    >
+      <Page />
+    </Suspense>
+  );
+}
 
 function AuthenticatedApp() {
   const { isLoadingAuth } = useAuth();
@@ -39,25 +55,25 @@ function AuthenticatedApp() {
     <Routes>
       <Route element={<SiteLayout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/work" element={<Work />} />
-        <Route path="/work/:slug" element={<CaseStudy />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/insights" element={<Insights />} />
-        <Route path="/insights/:slug" element={<InsightPost />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/terms" element={<Terms />} />
+        <Route path="/work" element={<RoutePage page={Work} />} />
+        <Route path="/work/:slug" element={<RoutePage page={CaseStudy} />} />
+        <Route path="/services" element={<RoutePage page={Services} />} />
+        <Route path="/insights" element={<RoutePage page={Insights} />} />
+        <Route path="/insights/:slug" element={<RoutePage page={InsightPost} />} />
+        <Route path="/about" element={<RoutePage page={About} />} />
+        <Route path="/contact" element={<RoutePage page={Contact} />} />
+        <Route path="/privacy" element={<RoutePage page={Privacy} />} />
+        <Route path="/terms" element={<RoutePage page={Terms} />} />
         <Route path="*" element={<NotFound />} />
       </Route>
       <Route element={<ProtectedRoute />}>
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/admin/posts" element={<AdminPosts />} />
+        <Route path="/admin" element={<RoutePage page={Admin} />} />
+        <Route path="/admin/posts" element={<RoutePage page={AdminPosts} />} />
       </Route>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/reset-password" element={<ResetPassword />} />
+      <Route path="/login" element={<RoutePage page={Login} />} />
+      <Route path="/register" element={<RoutePage page={Register} />} />
+      <Route path="/forgot-password" element={<RoutePage page={ForgotPassword} />} />
+      <Route path="/reset-password" element={<RoutePage page={ResetPassword} />} />
     </Routes>
   );
 }

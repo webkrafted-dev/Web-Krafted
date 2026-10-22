@@ -1,88 +1,93 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import Wordmark from "@/components/Wordmark";
+import { services } from "@/data/services";
+import { projects } from "@/data/projects";
+import useInsightCategories from "@/hooks/useInsightCategories";
 
-const links = [
+const exploreLinks = [
   { label: "Home", to: "/" },
-  { label: "Work", to: "/work" },
-  { label: "Services", to: "/services" },
-  { label: "Insights", to: "/insights" },
   { label: "About", to: "/about" },
   { label: "Contact", to: "/contact" },
+  { label: "Privacy Policy", to: "/privacy" },
+  { label: "Terms of Use", to: "/terms" },
 ];
+const linkStyle = "inline-flex min-h-8 items-center text-sm text-mist transition-colors hover:text-lime";
 
 export default function Footer() {
+  const insightCategories = useInsightCategories();
+
   return (
     <footer className="border-t border-white/10 bg-navy">
       <div className="shell py-14 lg:py-16">
-        <div className="grid gap-10 md:grid-cols-12">
-          <div className="md:col-span-5">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-12">
+          <div className="sm:col-span-2 lg:col-span-3">
             <Wordmark />
-            <p className="mt-5 font-heading text-lg font-semibold text-paper">
-              WK Web Krafted Studios
-            </p>
             <span aria-hidden="true" className="mt-4 block h-[2px] w-10 bg-lime" />
             <p className="mt-3 text-sm text-mist">Ideas. Websites. Real Impact.</p>
             <p className="mt-6 text-sm text-mist/80">Founded by Wanangwa Kamanga</p>
-            <a
-              href="https://www.instagram.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 rounded-lg border border-white/15 px-4 py-2.5 text-sm text-mist transition-colors duration-200 hover:border-lime hover:text-lime"
+            <Link
+              to="/contact"
+              className="mt-6 inline-flex items-center gap-2 rounded-lg bg-lime px-4 py-2.5 font-heading text-sm font-semibold text-navy transition-transform duration-200 hover:-translate-y-0.5"
             >
-              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
-                <rect x="3" y="3" width="18" height="18" rx="5" />
-                <circle cx="12" cy="12" r="3.6" />
-                <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
-              </svg>
-              Instagram
-            </a>
+              Start a Project <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
           </div>
 
-          <nav aria-label="Footer" className="md:col-span-4">
+          <nav aria-label="Explore" className="lg:col-span-2">
             <h2 className="font-heading text-[11px] font-semibold uppercase tracking-[0.24em] text-mist/70">
               Explore
             </h2>
-            <ul className="mt-4 grid grid-cols-2 gap-y-2.5 sm:gap-y-3">
-              {links.map((link) => (
+            <ul className="mt-4 space-y-1">
+              {exploreLinks.map((link) => (
                 <li key={link.to}>
-                  <Link
-                    to={link.to}
-                    className="inline-flex min-h-[32px] items-center text-sm text-mist transition-colors hover:text-lime"
-                  >
-                    {link.label}
-                  </Link>
+                  <Link to={link.to} className={linkStyle}>{link.label}</Link>
                 </li>
               ))}
             </ul>
           </nav>
 
-          <div className="md:col-span-3">
+          <nav aria-label="Services" className="lg:col-span-3">
             <h2 className="font-heading text-[11px] font-semibold uppercase tracking-[0.24em] text-mist/70">
-              Start a project
+              Services
             </h2>
-            <p className="mt-4 text-sm leading-relaxed text-mist">
-              Tell us what you need and we'll reply with a clear next step.
-            </p>
-            <Link
-              to="/contact"
-              className="mt-4 inline-flex items-center gap-1.5 font-heading text-sm font-semibold text-lime transition-opacity hover:opacity-80"
-            >
-              Start a Project
-              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
-            <ul className="mt-6 space-y-2">
-              <li>
-                <Link to="/privacy" className="text-sm text-mist/80 transition-colors hover:text-lime">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link to="/terms" className="text-sm text-mist/80 transition-colors hover:text-lime">
-                  Terms of Use
-                </Link>
-              </li>
+            <ul className="mt-4 space-y-1">
+              {services.map((service) => (
+                <li key={service.slug}>
+                  <Link to={`/services#${service.slug}`} className={linkStyle}>{service.title}</Link>
+                </li>
+              ))}
             </ul>
+          </nav>
+
+          <div className="grid gap-8 sm:grid-cols-2 sm:col-span-2 lg:col-span-4">
+            <nav aria-label="Selected work">
+              <h2 className="font-heading text-[11px] font-semibold uppercase tracking-[0.24em] text-mist/70">
+                Selected work
+              </h2>
+              <ul className="mt-4 space-y-1">
+                {projects.map((project) => (
+                  <li key={project.slug}>
+                    <Link to={`/work/${project.slug}`} className={linkStyle}>{project.name}</Link>
+                  </li>
+                ))}
+                <li><Link to="/work" className={`${linkStyle} font-semibold text-lime`}>All projects</Link></li>
+              </ul>
+            </nav>
+
+            <nav aria-label="Insights by category">
+              <h2 className="font-heading text-[11px] font-semibold uppercase tracking-[0.24em] text-mist/70">
+                Insights
+              </h2>
+              <ul className="mt-4 space-y-1">
+                {insightCategories.map((category) => (
+                  <li key={category}>
+                    <Link to={`/insights?category=${encodeURIComponent(category)}`} className={linkStyle}>{category}</Link>
+                  </li>
+                ))}
+                <li><Link to="/insights" className={`${linkStyle} font-semibold text-lime`}>All insights</Link></li>
+              </ul>
+            </nav>
           </div>
         </div>
 

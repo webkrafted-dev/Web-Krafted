@@ -17,7 +17,7 @@ export default function SelectedWork() {
 
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
-            <Reveal key={project.slug} delay={index * 0.05} className="h-full">
+            <Reveal key={project.slug} delay={index * 0.07} className="h-full">
               <ProjectCard project={project} tone="dark" />
             </Reveal>
           ))}
