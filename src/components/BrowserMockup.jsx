@@ -8,6 +8,7 @@ const mockupStyles = {
     headline: "Find your place on the team.",
     detail: "Teams, fixtures and club life in one clear view.",
     action: "Join the club",
+    navigation: ["Teams", "Fixtures", "About"],
     tiles: ["Teams", "Fixtures", "Club news"],
     art: "field",
     glow: "rgba(184, 255, 59, 0.25)",
@@ -22,6 +23,7 @@ const mockupStyles = {
     headline: "A table worth gathering around.",
     detail: "Seasonal menus, thoughtful plates, local warmth.",
     action: "Explore the menu",
+    navigation: ["Menu", "Our story", "Visit"],
     tiles: ["The menu", "Our story", "Find us"],
     art: "plate",
     glow: "rgba(251, 146, 60, 0.28)",
@@ -36,6 +38,7 @@ const mockupStyles = {
     headline: "Make the next move with clarity.",
     detail: "Complex decisions, explained in plain language.",
     action: "Explore services",
+    navigation: ["Services", "Approach", "Insights"],
     tiles: ["Strategy", "Expertise", "Insights"],
     art: "skyline",
     glow: "rgba(125, 211, 252, 0.24)",
@@ -123,7 +126,7 @@ export default function BrowserMockup({ variant = "sports", label = "" }) {
               </span>
             </div>
             <div className="hidden items-center gap-3 font-heading text-[8px] text-charcoal/50 sm:flex">
-              <span>About</span><span>Services</span><span>Contact</span>
+              {preview.navigation.map((item) => <span key={item}>{item}</span>)}
             </div>
             <span className={`shrink-0 rounded px-2 py-1 font-heading text-[8px] font-semibold ${preview.button}`}>
               {preview.action}
