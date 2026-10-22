@@ -1,0 +1,6 @@
+# Replace https://your-domain.com with your live domain once the app is published.
+User-agent: *
+Allow: /
+Disallow: /admin
+
+Sitemap: https://your-domain.com/sitemap.xml
