@@ -1,5 +1,5 @@
 const base =
-  "w-full rounded-lg border bg-white px-4 py-3 text-[15px] text-charcoal transition-colors placeholder:text-charcoal/40 focus:outline-none focus:ring-2 focus:ring-navy/20";
+  "form-field-motion w-full rounded-lg border bg-white px-4 py-3 text-[15px] text-charcoal placeholder:text-charcoal/40 focus:outline-none focus:ring-2 focus:ring-lime/25";
 
 export function FieldShell({ id, label, required, hint, error, children }) {
   return (

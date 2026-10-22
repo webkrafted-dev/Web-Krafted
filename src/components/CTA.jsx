@@ -10,24 +10,26 @@ const styles = {
 };
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 font-heading text-sm font-semibold transition-all duration-200 disabled:opacity-60 disabled:pointer-events-none";
+  "motion-cta inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 font-heading text-sm font-semibold transition-all duration-200 disabled:opacity-60 disabled:pointer-events-none";
 
 export default function CTA({
   to,
-  href,
+  href = undefined,
   children,
   variant = "primary",
   className = "",
   icon = null,
   ...props
 }) {
-  const cls = `${variant === "link" || variant === "linkDark" ? "inline-flex items-center gap-2 font-heading text-sm font-semibold" : base} ${styles[variant]} ${className}`;
+  const linkOnly = variant === "link" || variant === "linkDark";
+  const cls = `${linkOnly ? "motion-cta inline-flex items-center gap-2 font-heading text-sm font-semibold" : base} ${styles[variant]} ${className}`;
+  const iconNode = icon ? <span className="motion-arrow inline-flex">{icon}</span> : null;
 
   if (href) {
     return (
       <a href={href} className={cls} {...props}>
         {children}
-        {icon}
+        {iconNode}
       </a>
     );
   }
@@ -35,7 +37,7 @@ export default function CTA({
   return (
     <Link to={to} className={cls} {...props}>
       {children}
-      {icon}
+      {iconNode}
     </Link>
   );
 }

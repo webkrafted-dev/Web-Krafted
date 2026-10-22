@@ -87,12 +87,15 @@ export default function HeroVisual() {
             {projects.map((project, index) => {
               const active = index === activeIndex;
               return (
-                <button
+                <motion.button
                   key={project.slug}
                   type="button"
                   aria-pressed={active}
                   aria-label={`Show ${project.name} ${previewLabels[project.mockup]} concept`}
                   onClick={() => setActiveIndex(index)}
+                  whileHover={prefersReducedMotion ? undefined : { y: -1, scale: 1.015 }}
+                  whileTap={prefersReducedMotion ? undefined : { scale: 0.97 }}
+                  transition={{ type: "spring", stiffness: 460, damping: 32 }}
                   className={`min-h-10 cursor-pointer rounded-lg border px-2 py-2 text-left font-heading text-[10px] font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d243f] sm:text-[11px] ${
                     active
                       ? "border-lime/50 bg-lime/10 text-lime"
@@ -100,7 +103,7 @@ export default function HeroVisual() {
                   }`}
                 >
                   <span className="block truncate">{previewLabels[project.mockup]}</span>
-                </button>
+                </motion.button>
               );
             })}
           </div>

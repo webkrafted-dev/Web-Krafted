@@ -149,10 +149,10 @@ export default function Contact() {
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link
                     to="/work"
-                    className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-navy px-5 py-3 font-heading text-[13px] font-semibold text-paper transition-colors hover:bg-navy-soft"
+                    className="motion-cta inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-navy px-5 py-3 font-heading text-[13px] font-semibold text-paper transition-all hover:-translate-y-0.5 hover:bg-navy-soft"
                   >
                     Explore our work
-                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                    <ArrowRight className="motion-arrow h-4 w-4" aria-hidden="true" />
                   </Link>
                   <button
                     type="button"
@@ -161,7 +161,7 @@ export default function Contact() {
                       setErrors({});
                       setServerError("");
                     }}
-                    className="inline-flex min-h-[44px] items-center rounded-lg border border-navy/20 px-5 py-3 font-heading text-[13px] font-semibold text-navy transition-colors hover:border-navy"
+                    className="motion-cta inline-flex min-h-[44px] items-center rounded-lg border border-navy/20 px-5 py-3 font-heading text-[13px] font-semibold text-navy transition-all hover:border-navy"
                   >
                     Send another enquiry
                   </button>
@@ -275,7 +275,7 @@ export default function Contact() {
                       <button
                         type="button"
                         onClick={handleSubmit}
-                        className="mt-2 font-heading text-[13px] font-semibold text-red-900 underline underline-offset-4"
+                        className="motion-cta mt-2 font-heading text-[13px] font-semibold text-red-900 underline underline-offset-4"
                       >
                         Try again
                       </button>
@@ -293,10 +293,10 @@ export default function Contact() {
                     <button
                       type="submit"
                       disabled={status === "submitting"}
-                      className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-lg bg-lime px-6 py-3 font-heading text-sm font-semibold text-navy transition-all hover:-translate-y-0.5 hover:bg-lime-deep disabled:pointer-events-none disabled:opacity-60"
+                      className="motion-cta inline-flex min-h-[48px] items-center justify-center gap-2 rounded-lg bg-lime px-6 py-3 font-heading text-sm font-semibold text-navy transition-all hover:-translate-y-0.5 hover:bg-lime-deep disabled:pointer-events-none disabled:opacity-60"
                     >
                       {status === "submitting" ? "Sending enquiry…" : "Send enquiry"}
-                      {status !== "submitting" && <ArrowRight className="h-4 w-4" aria-hidden="true" />}
+                      {status !== "submitting" && <ArrowRight className="motion-arrow h-4 w-4" aria-hidden="true" />}
                     </button>
                   </div>
                 </div>
@@ -339,10 +339,10 @@ export default function Contact() {
                 same place.
               </p>
               <Link
-                to="/services#pricing"
+                to="/pricing#pricing"
                 className="mt-4 inline-flex items-center gap-1.5 font-heading text-[13px] font-semibold text-navy underline decoration-lime decoration-2 underline-offset-4"
               >
-                See indicative pricing
+                See launch pricing
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>

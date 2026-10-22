@@ -126,7 +126,7 @@ export default function BrowserMockup({ variant = "sports", label = "", priority
               loading={priority ? "eager" : "lazy"}
               fetchPriority={priority ? "high" : "auto"}
               decoding="async"
-              className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+              className="absolute inset-0 -z-20 h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.025]"
             />
             <div
               className="absolute inset-0 -z-10"

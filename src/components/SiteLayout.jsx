@@ -21,10 +21,10 @@ export default function SiteLayout() {
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={pathname}
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 9, filter: "blur(2px)" }}
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -5 }}
-            transition={{ duration: prefersReducedMotion ? 0 : 0.22, ease: [0.22, 1, 0.36, 1] }}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 14, scale: 0.995, filter: "blur(3px)" }}
+            animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+            exit={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -8, scale: 0.998, filter: "blur(2px)" }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.28, ease: [0.22, 1, 0.36, 1] }}
           >
             <Outlet />
           </motion.div>

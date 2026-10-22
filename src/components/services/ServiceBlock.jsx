@@ -21,10 +21,10 @@ export default function ServiceBlock({ service, index }) {
           <p className="mt-3 text-[15.5px] leading-relaxed text-charcoal/75">{service.oneLine}</p>
           <Link
             to={`/contact?type=${encodeURIComponent(service.projectType)}`}
-            className="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-navy px-5 py-3 font-heading text-[13px] font-semibold text-paper transition-colors hover:bg-navy-soft"
+            className="motion-cta mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-navy px-5 py-3 font-heading text-[13px] font-semibold text-paper transition-all hover:-translate-y-0.5 hover:bg-navy-soft"
           >
             Start a Project
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            <ArrowRight className="motion-arrow h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
 

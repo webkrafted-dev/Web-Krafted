@@ -7,15 +7,15 @@ export default function ProjectCard({ project, tone = "dark", delay = 0 }) {
   const dark = tone === "dark";
   return (
     <article
-      className={`group flex h-full flex-col overflow-hidden rounded-xl border p-3 transition-all duration-200 ${
+      className={`motion-lift group flex h-full flex-col overflow-hidden rounded-xl border p-3 transition-all duration-300 hover:-translate-y-1 ${
         dark
-          ? "border-white/10 bg-white/[0.03] hover:border-lime/40 hover:bg-white/[0.055]"
+          ? "border-white/10 bg-white/[0.03] hover:border-lime/40 hover:bg-white/[0.055] hover:shadow-[0_20px_44px_-30px_rgba(0,0,0,0.5)]"
           : "border-mist/80 bg-white hover:border-navy/25 hover:shadow-[0_20px_50px_-40px_rgba(11,31,59,0.5)]"
       }`}
     >
       <BrowserMockup
         variant={project.mockup}
-        label={`Abstract layout preview for the ${project.name} concept project`}
+        label={`Illustrative ${project.category.toLowerCase()} website concept for ${project.name}. ${project.tagline}`}
       />
       <div className="flex flex-1 flex-col p-4 sm:p-5">
         <div className="flex flex-wrap items-center gap-2">

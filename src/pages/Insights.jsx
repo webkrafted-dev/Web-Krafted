@@ -16,7 +16,7 @@ function PostCard({ post }) {
     <article className="h-full">
       <Link
         to={`/insights/${post.slug}`}
-        className="group flex h-full flex-col rounded-xl border border-mist/70 bg-white p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-navy/25 hover:shadow-[0_18px_44px_-34px_rgba(11,31,59,0.45)]"
+        className="motion-lift group flex h-full flex-col rounded-xl border border-mist/70 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-navy/25 hover:shadow-[0_18px_44px_-34px_rgba(11,31,59,0.45)]"
       >
         <div className="flex flex-wrap items-center gap-2 font-heading text-[10px] font-semibold uppercase tracking-[0.16em]">
           <span className="rounded-full bg-navy px-2.5 py-1 text-lime">{post.category || "Insights"}</span>
@@ -89,7 +89,7 @@ export default function Insights() {
                         type="button"
                         aria-pressed={isActive}
                         onClick={() => setSearchParams(category === "All" ? {} : { category }, { replace: true })}
-                        className={`min-h-10 cursor-pointer rounded-full border px-4 py-2 font-heading text-xs font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-deep focus-visible:ring-offset-2 ${
+                        className={`motion-cta min-h-10 cursor-pointer rounded-full border px-4 py-2 font-heading text-xs font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-deep focus-visible:ring-offset-2 ${
                           isActive
                             ? "border-navy bg-navy text-paper"
                             : "border-mist bg-white text-charcoal/70 hover:border-navy/30 hover:text-navy"

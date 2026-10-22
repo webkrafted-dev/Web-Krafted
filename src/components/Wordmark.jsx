@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Wordmark({ tone = "dark", className = "" }) {
+export default function Wordmark({ tone = "dark", className = "", onClick = undefined }) {
   const onDark = tone === "dark";
   const label = onDark ? "text-paper" : "text-navy";
   const sub = onDark ? "text-mist/70" : "text-charcoal/55";
@@ -11,8 +11,9 @@ export default function Wordmark({ tone = "dark", className = "" }) {
       to="/"
       className={`group inline-flex items-center gap-2.5 rounded-md ${className}`}
       aria-label="WK Web Krafted Studios — home"
+      onClick={onClick}
     >
-      <svg viewBox="0 0 58 34" className="h-[30px] w-[51px] shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5" aria-hidden="true">
+      <svg viewBox="0 0 58 34" className="h-[30px] w-[51px] shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5 motion-reduce:transform-none" aria-hidden="true">
         <path d="M2 4.5h8.1l5.4 15.1L21 4.5h7.7l5.3 15.1 5.5-15.1h8.1L36.5 29h-7.1l-4.6-10-4.6 10h-7.1L2 4.5Z" fill={mark} />
         <path d="m39 24 7.4-11L56 29H41.3L39 24Z" fill="#B8FF3B" />
       </svg>

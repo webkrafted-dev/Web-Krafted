@@ -29,7 +29,7 @@ export default function ServicesGrid() {
             <Reveal key={service.slug} delay={index * 0.04} className="h-full">
               <Link
                 to={`/services#${service.slug}`}
-                className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-mist/80 bg-white p-6 shadow-[0_12px_34px_-32px_rgba(11,31,59,0.65)] transition-all duration-300 hover:-translate-y-1 hover:border-navy/25 hover:shadow-[0_22px_48px_-34px_rgba(11,31,59,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-deep focus-visible:ring-offset-2"
+                className="motion-lift group relative flex h-full flex-col overflow-hidden rounded-xl border border-mist/80 bg-white p-6 shadow-[0_12px_34px_-32px_rgba(11,31,59,0.65)] transition-all duration-300 hover:-translate-y-1 hover:border-navy/25 hover:shadow-[0_22px_48px_-34px_rgba(11,31,59,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-deep focus-visible:ring-offset-2"
               >
                 <span aria-hidden="true" className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-lime transition-transform duration-300 group-hover:scale-x-100 group-focus-visible:scale-x-100" />
                 <div className="flex items-start justify-between">

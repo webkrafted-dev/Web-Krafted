@@ -7,12 +7,12 @@ import {
 
 const faqs = [
   {
-    q: "How many revisions are included?",
-    a: "Two reasonable rounds of revisions are included in every project tier. A round means a consolidated set of feedback changes. Anything beyond that is quoted separately, so there are no surprises.",
+    q: "What is included in each price range?",
+    a: "Each package lists its core inclusions above. The final written scope clarifies the exact pages, content, features, and deliverables for your project before work begins.",
   },
   {
     q: "How long will my website take?",
-    a: "A landing page is usually 3–5 business days, a standard business site 7–10 business days, and a premium or larger site 10–15 business days. Web applications are scoped after discovery. Timelines begin once the initial payment and required content have been received.",
+    a: "Timing depends on the agreed scope, content readiness, and feedback. We share a realistic schedule with your written project scope before work starts.",
   },
   {
     q: "What do I need to provide?",
@@ -28,7 +28,7 @@ const faqs = [
   },
   {
     q: "How does payment work?",
-    a: "Payment is milestone-based. The schedule is discussed and agreed in the proposal before any work starts, and it is written into the agreement.",
+    a: "The payment schedule is discussed and agreed in the proposal before any work starts, and it is written into the agreement.",
   },
   {
     q: "What happens if the scope changes?",
@@ -57,7 +57,7 @@ export default function PricingFaq() {
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
               <AccordionItem key={faq.q} value={`item-${index}`} className="border-b border-mist/80">
-                <AccordionTrigger className="py-4 text-left font-heading text-[15px] font-semibold text-navy hover:no-underline">
+                <AccordionTrigger className="py-4 text-left font-heading text-[15px] font-semibold text-navy transition-colors hover:text-navy-soft hover:no-underline">
                   {faq.q}
                 </AccordionTrigger>
                 <AccordionContent className="pb-4 text-[14.5px] leading-relaxed text-charcoal/75">
