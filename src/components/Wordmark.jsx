@@ -4,7 +4,6 @@ export default function Wordmark({ tone = "dark", className = "", onClick = unde
   const onDark = tone === "dark";
   const label = onDark ? "text-paper" : "text-navy";
   const sub = onDark ? "text-mist/70" : "text-charcoal/55";
-  const mark = onDark ? "#F7F8FA" : "#0B1F3B";
 
   return (
     <Link
@@ -13,10 +12,13 @@ export default function Wordmark({ tone = "dark", className = "", onClick = unde
       aria-label="WK Studios — Web Krafted Studios home"
       onClick={onClick}
     >
-      <svg viewBox="0 0 58 34" className="h-[34px] w-[58px] shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5 motion-reduce:transform-none" aria-hidden="true">
-        <path d="M2 4.5h8.1l5.4 15.1L21 4.5h7.7l5.3 15.1 5.5-15.1h8.1L36.5 29h-7.1l-4.6-10-4.6 10h-7.1L2 4.5Z" fill={mark} />
-        <path d="m39 24 7.4-11L56 29H41.3L39 24Z" fill="#B8FF3B" />
-      </svg>
+      <img
+        src={onDark ? "/wk-mark-on-dark.png" : "/wk-mark-on-light.png"}
+        alt=""
+        aria-hidden="true"
+        draggable="false"
+        className="h-auto w-[72px] shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5 motion-reduce:transform-none"
+      />
       <span className="flex flex-col justify-center leading-none">
         <span className={`font-heading text-[11px] font-semibold uppercase tracking-[0.42em] ${label}`}>
           Studios
