@@ -51,14 +51,50 @@ function getServiceClient() {
   });
 }
 
-async function notifyOwner(subject, lines) {
-  const recipient = process.env.NOTIFICATION_EMAIL;
+function getConfiguredNotificationRecipients() {
+  return [...new Set((process.env.NOTIFICATION_EMAIL || "")
+    .split(",")
+    .map((email) => email.trim().toLowerCase())
+    .filter(validEmail))];
+}
+
+async function getNotificationRecipients(client) {
+  const configuredRecipients = getConfiguredNotificationRecipients();
+  if (configuredRecipients.length) return configuredRecipients;
+
+  const { data: admins, error } = await client.from("admins").select("user_id");
+  if (error) throw new Error(`Could not load notification recipients: ${error.message}`);
+
+  const recipients = [];
+  for (const admin of admins || []) {
+    const { data, error: userError } = await client.auth.admin.getUserById(admin.user_id);
+    if (userError) {
+      console.error("Could not resolve an admin email for notification:", userError.message);
+      continue;
+    }
+    const email = data?.user?.email?.trim().toLowerCase() || "";
+    if (validEmail(email)) recipients.push(email);
+  }
+
+  return [...new Set(recipients)];
+}
+
+async function notifyOwner(client, subject, lines) {
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.RESEND_FROM_EMAIL;
-  if (!recipient && !apiKey && !from) return;
-  if (!recipient || !apiKey || !from) {
-    console.error("Email notification skipped: configure NOTIFICATION_EMAIL, RESEND_API_KEY, and RESEND_FROM_EMAIL together.");
-    return;
+  if (!apiKey && !from) {
+    console.error("Email notification skipped: configure RESEND_API_KEY and RESEND_FROM_EMAIL in Vercel.");
+    return false;
+  }
+  if (!apiKey || !from) {
+    console.error("Email notification skipped: configure RESEND_API_KEY and RESEND_FROM_EMAIL together.");
+    return false;
+  }
+
+  const recipients = await getNotificationRecipients(client);
+  if (!recipients.length) {
+    console.error("Email notification skipped: no valid admin email was found in Supabase.");
+    return false;
   }
 
   const response = await fetch("https://api.resend.com/emails", {
@@ -69,15 +105,18 @@ async function notifyOwner(subject, lines) {
     },
     body: JSON.stringify({
       from,
-      to: [recipient],
+      to: recipients,
       subject,
       text: lines.join("\n"),
     }),
   });
 
   if (!response.ok) {
-    console.error("Email notification failed:", response.status, await response.text());
+    console.error("Email notification failed:", response.status, (await response.text()).slice(0, 500));
+    return false;
   }
+
+  return true;
 }
 
 function getBearerToken(req) {
@@ -114,7 +153,7 @@ async function getAdminClient(req) {
     .maybeSingle();
   if (adminError) throw new Error(`Admin membership check failed: ${adminError.message}`);
   if (!admin) return { error: { status: 403, message: "This account is not authorized to send replies." } };
-  return { client };
+  return { client, adminEmail: authData.user.email || "" };
 }
 
 async function saveSubmission(table, email, values, subject, lines) {
@@ -143,7 +182,7 @@ async function saveSubmission(table, email, values, subject, lines) {
   }
 
   try {
-    await notifyOwner(subject, lines);
+    await notifyOwner(client, subject, lines);
   } catch (error) {
     console.error("Email notification failed:", error.message);
   }
@@ -279,10 +318,9 @@ export async function handleReply(req, res) {
   if (message.length < 1) errors.message = "Write a reply before sending.";
   if (Object.keys(errors).length) return res.status(400).json({ ok: false, errors });
 
-  const recipient = process.env.NOTIFICATION_EMAIL;
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.RESEND_FROM_EMAIL;
-  if (!recipient || !apiKey || !from) {
+  if (!apiKey || !from) {
     return res.status(503).json({ ok: false, error: "Email replies are not configured yet." });
   }
 
@@ -292,6 +330,12 @@ export async function handleReply(req, res) {
       return res.status(authorization.error.status).json({ ok: false, error: authorization.error.message });
     }
     const { client } = authorization;
+    const replyTo = validEmail(authorization.adminEmail || "")
+      ? authorization.adminEmail
+      : (await getNotificationRecipients(client))[0];
+    if (!replyTo) {
+      return res.status(503).json({ ok: false, error: "No valid admin email is available for replies." });
+    }
     const { data: submission, error: submissionError } = await client
       .from(table)
       .select("id, name, email")
@@ -311,7 +355,7 @@ export async function handleReply(req, res) {
       body: JSON.stringify({
         from,
         to: [submission.email],
-        reply_to: recipient,
+        reply_to: replyTo,
         subject,
         text: `Hi ${submission.name},\n\n${message}\n\n— WK Studios`,
       }),

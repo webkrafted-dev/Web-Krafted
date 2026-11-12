@@ -38,9 +38,19 @@ Row Level Security policies in the schema permit public reads of published posts
 4. Set the production site URL in Supabase Auth's allowed redirect URLs. Add your Vercel preview URLs if you use preview deployments.
 5. Deploy. Vercel serves the frontend and `/api/submit-enquiry`, `/api/submit-message`, and the admin-only `/api/send-reply`; Supabase stores contact submissions and published posts.
 
-Email notifications and admin replies require all three Vercel variables: `NOTIFICATION_EMAIL` (the owner inbox and reply-to address), `RESEND_API_KEY` (keep as a secret), and `RESEND_FROM_EMAIL` (a sender verified with Resend). New enquiries and quick messages notify the owner; the admin inbox can send a manual email reply to the address on the selected submission and then mark it Replied. Submissions remain saved to Supabase if notification delivery is unavailable.
+Email notifications and admin replies require `RESEND_API_KEY` (secret) and `RESEND_FROM_EMAIL` (a sender verified with Resend) in Vercel. `NOTIFICATION_EMAIL` is an optional comma-separated override; if empty, the server resolves recipient addresses from accounts listed in `public.admins`. New enquiries and quick messages are stored for the `/admin` inbox before email notification is attempted. The admin inbox can send a manual reply to a selected submission and use the signed-in admin's email as the reply-to address. Submissions remain saved to Supabase if email delivery is unavailable.
 
 Vercel's CDN serves the site globally. Supabase keeps the durable database in the region selected for the project; database backup and retention options depend on the Supabase plan.
+
+## Vercel Web Analytics
+
+The React root mounts `@vercel/analytics/react` on every route. In Vercel, enable Web Analytics for the `web-krafted-pods` project (the project serving `web-krafted.vercel.app`), deploy the change, then visit the site to start collecting page views. Content blockers may prevent some visits from being counted.
+
+## Supabase best-effort activity check
+
+`.github/workflows/supabase-keep-alive.yml` runs three times daily and sends a read-only request to the public, RLS-protected `posts` endpoint. To enable it, add repository Actions secrets named `SUPABASE_URL` and `SUPABASE_ANON_KEY`, then run the workflow once with **Run workflow** to verify the connection. The query reads only published-post IDs and does not write or access inquiry data; it does not use the service-role key.
+
+This is a best-effort nudge, not a promise that Supabase will never pause the project: inactivity decisions are controlled by Supabase and may depend on overall activity. If uninterrupted database availability is required, use a Supabase plan that does not automatically pause inactive projects. See [Supabase's free-project pausing policy](https://supabase.com/docs/guides/platform/free-project-pausing).
 
 ## Motion components
 

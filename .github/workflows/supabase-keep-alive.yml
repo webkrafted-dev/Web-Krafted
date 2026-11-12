@@ -1,0 +1,43 @@
+name: Supabase best-effort activity check
+
+on:
+  schedule:
+    # Three small read-only queries per day; this is not a service-availability guarantee.
+    - cron: "13 5,13,21 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: supabase-best-effort-activity-check
+  cancel-in-progress: true
+
+jobs:
+  query-public-content:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Query published posts through the public API
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          : "${SUPABASE_URL:?Add SUPABASE_URL as a repository Actions secret}"
+          : "${SUPABASE_ANON_KEY:?Add SUPABASE_ANON_KEY as a repository Actions secret}"
+
+          endpoint="${SUPABASE_URL%/}/rest/v1/posts?select=id&published=eq.true&limit=1"
+          status="$(curl --silent --show-error --output /dev/null --write-out '%{http_code}' \
+            --max-time 20 \
+            --header "apikey: ${SUPABASE_ANON_KEY}" \
+            --header "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
+            "$endpoint")"
+
+          if [[ "$status" != "200" ]]; then
+            echo "Supabase read-only query returned HTTP ${status}. Check the repository secrets and project status."
+            exit 1
+          fi
+
+          echo "Supabase public posts endpoint responded with HTTP 200."
