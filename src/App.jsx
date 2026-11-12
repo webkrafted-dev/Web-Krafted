@@ -9,6 +9,7 @@ import SiteLayout from "@/components/SiteLayout";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Home from "@/pages/Home";
 import NotFound from "@/pages/NotFound";
+import { Analytics } from "@vercel/analytics/react";
 
 const Work = lazy(() => import("@/pages/Work"));
 const CaseStudy = lazy(() => import("@/pages/CaseStudy"));
@@ -91,6 +92,7 @@ export default function App() {
           <AuthenticatedApp />
         </BrowserRouter>
         <Toaster />
+        <Analytics />
       </QueryClientProvider>
     </AuthProvider>
   );
