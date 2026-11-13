@@ -286,6 +286,7 @@ for (const project of projects) {
 
 for (const post of posts) {
   const articleText = stripMarkdown(post.content || "");
+  const hasArticleContent = articleText.length > 0;
   const articleBody = articleText
     ? paragraphMarkup(articleText)
     : `<p>This article is being prepared. Please check back soon.</p>`;
@@ -299,7 +300,7 @@ for (const post of posts) {
       section(post.category || "Insights", articleBody),
       section("More ideas", `<p>${internalLink("/insights", "Browse all insights")}</p>`),
     ],
-    { type: "article" }
+    { type: "article", noindex: !hasArticleContent }
   ));
 }
 
@@ -399,7 +400,8 @@ for (const currentPage of pages) {
 }
 
 const indexablePages = pages.filter((currentPage) => !currentPage.noindex);
+const noindexPages = pages.filter((currentPage) => currentPage.noindex);
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${indexablePages.map((currentPage) => `  <url><loc>${escapeHtml(absoluteSiteUrl(currentPage.pathname))}</loc></url>`).join("\n")}\n</urlset>\n`;
 await writeFile(path.join(dist, "sitemap.xml"), sitemap, "utf8");
 
-console.log(`Prerendered ${indexablePages.length} public routes and ${privateRoutes.length} noindex application routes.`);
+console.log(`Prerendered ${pages.length} route snapshots: ${indexablePages.length} indexable and ${noindexPages.length} noindex.`);
