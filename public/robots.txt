@@ -1,6 +1,11 @@
-# Replace https://your-domain.com with your live domain once the app is published.
 User-agent: *
 Allow: /
 Disallow: /admin
+Disallow: /admin/
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /api/
 
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://web-krafted.vercel.app/sitemap.xml

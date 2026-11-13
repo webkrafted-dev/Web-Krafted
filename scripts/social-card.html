@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=1200, initial-scale=1" />
+<title>WK Studios social preview</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; margin: 0; overflow: hidden; }
+  body { font-family: Inter, Arial, sans-serif; color: #F7F8FA; background: #0B1F3B; }
+  .canvas { position: relative; width: 1200px; height: 630px; overflow: hidden; padding: 58px 72px; background: radial-gradient(ellipse at 78% 47%, rgba(184,255,59,.12), transparent 32%), linear-gradient(120deg, #0B1F3B 0%, #102A49 100%); }
+  .grid { position: absolute; inset: 0; opacity: .16; background-image: linear-gradient(rgba(221,228,236,.18) 1px, transparent 1px), linear-gradient(90deg, rgba(221,228,236,.18) 1px, transparent 1px); background-size: 56px 56px; mask-image: linear-gradient(105deg, #000 0%, transparent 78%); }
+  .accent { position: absolute; top: 0; right: 106px; width: 2px; height: 100%; background: linear-gradient(transparent, #B8FF3B 25%, #B8FF3B 74%, transparent); opacity: .75; }
+  .top { position: relative; display: flex; align-items: center; gap: 22px; }
+  .mark { display: block; width: 166px; height: 70px; object-fit: contain; }
+  .studio { color: #DDE4EC; font-size: 16px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; }
+  .copy { position: relative; z-index: 2; width: 710px; margin-top: 48px; }
+  h1 { margin: 0; font-family: Inter, Arial, sans-serif; font-size: 58px; line-height: 1.08; font-weight: 700; letter-spacing: -.055em; }
+  h1 span { color: #B8FF3B; }
+  .sub { margin-top: 20px; max-width: 620px; color: #DDE4EC; font-size: 21px; line-height: 1.55; }
+  .bottom { position: absolute; left: 72px; bottom: 52px; display: flex; align-items: center; gap: 16px; color: #F7F8FA; font-size: 14px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+  .line { width: 42px; height: 2px; background: #B8FF3B; }
+  .orbit { position: absolute; right: 120px; top: 190px; width: 330px; height: 260px; border: 1px solid rgba(184,255,59,.32); border-radius: 50%; transform: rotate(-27deg); }
+  .orbit:before, .orbit:after { content: ''; position: absolute; inset: 23px 38px; border: 1px solid rgba(221,228,236,.16); border-radius: 50%; }
+  .orbit:after { inset: 48px 78px; border-color: rgba(184,255,59,.2); }
+  .module { position: absolute; right: 226px; top: 288px; width: 118px; height: 96px; border: 1px solid rgba(184,255,59,.62); background: linear-gradient(135deg, rgba(184,255,59,.12), rgba(184,255,59,.02)); box-shadow: 0 24px 60px rgba(0,0,0,.22); }
+  .module:before { content: ''; position: absolute; left: 14px; right: 14px; top: 18px; height: 7px; background: #B8FF3B; opacity: .9; }
+  .module:after { content: ''; position: absolute; left: 14px; right: 34px; top: 38px; height: 4px; background: rgba(221,228,236,.56); box-shadow: 0 13px 0 rgba(221,228,236,.25); }
+</style>
+</head>
+<body>
+  <main class="canvas">
+    <div class="grid" aria-hidden="true"></div><div class="accent" aria-hidden="true"></div>
+    <div class="top"><img class="mark" src="../public/wk-mark-on-dark.png" width="266" height="112" alt="" /><span class="studio">WK Studios</span></div>
+    <section class="copy">
+      <h1>Digital experiences,<br /><span>built around your next idea.</span></h1>
+      <p class="sub">Thoughtful websites for businesses, creators, portfolios, communities, and events.</p>
+    </section>
+    <div class="orbit" aria-hidden="true"></div><div class="module" aria-hidden="true"></div>
+    <div class="bottom"><span class="line"></span><span>Web design &amp; development</span></div>
+  </main>
+</body>
+</html>

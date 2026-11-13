@@ -58,7 +58,8 @@ export default function InsightPost() {
 
   usePageMeta(
     post?.title ? `${post.title} — WK Web Krafted Studios` : "Insight — WK Web Krafted Studios",
-    post?.excerpt || "Ideas about websites, design, and building a stronger online presence."
+    post?.excerpt || "Ideas about websites, design, and building a stronger online presence.",
+    { type: "article", noindex: !post }
   );
 
   if (loading) {

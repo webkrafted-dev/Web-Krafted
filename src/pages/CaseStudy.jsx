@@ -24,7 +24,8 @@ export default function CaseStudy() {
 
   usePageMeta(
     project ? `${project.name} — concept project — WK Web Krafted Studios` : "Project not found",
-    project ? project.summary : "This concept project could not be found."
+    project ? project.summary : "This concept project could not be found.",
+    { noindex: !project }
   );
 
   if (!project) {

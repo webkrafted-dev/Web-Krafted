@@ -3,7 +3,7 @@ import { ArrowRight, ArrowLeft } from "lucide-react";
 import usePageMeta from "@/hooks/usePageMeta";
 
 export default function NotFound() {
-  usePageMeta("Page not found — WK Web Krafted Studios", "That page could not be found.");
+  usePageMeta("Page not found — WK Web Krafted Studios", "That page could not be found.", { noindex: true });
 
   return (
     <section className="bg-navy">
