@@ -163,7 +163,7 @@ grant select on public.admins to authenticated;
 grant select on public.posts to anon, authenticated;
 grant insert, update, delete on public.posts to authenticated;
 grant select, update on public.enquiries, public.messages to authenticated;
-grant insert on public.enquiries, public.messages to service_role;
+grant select (id), insert on public.enquiries, public.messages to service_role;
 
 revoke all on public.submission_rate_limits from anon, authenticated;
 revoke all on function public.is_admin() from public;
