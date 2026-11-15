@@ -9,7 +9,7 @@ export default function Wordmark({ tone = "dark", className = "", onClick = unde
     <Link
       to="/"
       className={`group inline-flex items-center gap-3 rounded-md ${className}`}
-      aria-label="WK Studios — Web Krafted Studios home"
+      aria-label="WK Web Krafted Studios home"
       onClick={onClick}
     >
       <img
@@ -17,12 +17,10 @@ export default function Wordmark({ tone = "dark", className = "", onClick = unde
         alt=""
         aria-hidden="true"
         draggable="false"
-        className="h-auto w-[72px] shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5 motion-reduce:transform-none"
+        className="h-auto w-[68px] shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5 motion-reduce:transform-none sm:w-[72px]"
       />
       <span className="flex flex-col justify-center leading-none">
-        <span className={`font-heading text-[11px] font-semibold uppercase tracking-[0.42em] ${label}`}>
-          Studios
-        </span>
+        <span className={`font-heading text-[11px] font-semibold uppercase tracking-[0.42em] ${label}`}>Studios</span>
         <span className={`mt-1.5 font-body text-[7px] font-medium uppercase tracking-[0.26em] ${sub}`}>
           Web Krafted Studios
         </span>

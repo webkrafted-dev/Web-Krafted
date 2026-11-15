@@ -79,8 +79,8 @@ export const projects = [
   },
   {
     slug: "lena-rowe-portfolio",
-    name: "Lena Rowe — Photography",
-    category: "Creator & Portfolio",
+    name: "Lena Rowe Photography",
+    category: "Creative & Portfolio",
     tagline: "An editorial portfolio that gives selected work the space it deserves.",
     mockup: "creator",
     summary:

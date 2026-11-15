@@ -1,78 +1,134 @@
+import { useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import CTA from "@/components/CTA";
-import HeroVisual from "@/components/home/HeroVisual";
-import ServiceIcon from "@/components/ServiceIcon";
-import GlyphLotteryText from "@/components/brand/GlyphLotteryText";
+import HeroField from "@/components/home/HeroField";
+import Magnetic from "@/components/Magnetic";
+import SplitTextHeading from "@/components/reactbits/SplitTextHeading";
 import { heroServices } from "@/data/services";
+
+gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 export default function Hero() {
   const prefersReducedMotion = useReducedMotion();
+  const ref = useRef(null);
+  const fieldRef = useRef(null);
+
+  useGSAP(
+    () => {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      gsap.to(fieldRef.current, {
+        yPercent: -9,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ref.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.6,
+        },
+      });
+    },
+    { scope: ref }
+  );
 
   return (
-    <section className="hero-surface bg-navy text-paper">
-      <div className="shell relative z-10 pb-14 pt-14 sm:pb-16 sm:pt-16 lg:pb-20 lg:pt-20">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
-          <div>
-            <span className="eyebrow text-lime">
-              <span className="h-px w-8 bg-lime" aria-hidden="true" />
-              Ideas. Websites. Real Impact.
-            </span>
-            <motion.h1
-              aria-label="Digital experiences, built around your next idea."
-              initial={prefersReducedMotion ? false : "hidden"}
-              animate="visible"
-              variants={{
-                hidden: {},
-                visible: { transition: { delayChildren: 0.08, staggerChildren: 0.13 } },
-              }}
-              className="mt-6 max-w-[680px] font-heading text-[2.15rem] font-bold leading-[1.06] tracking-[-0.03em] sm:text-[2.9rem] lg:text-[3.6rem]"
+    <section ref={ref} className="relative isolate min-h-[92svh] overflow-hidden border-b border-white/10 bg-ink">
+      <div className="absolute inset-0 bg-[radial-gradient(900px_500px_at_75%_20%,rgba(184,255,59,0.12),transparent_55%),radial-gradient(700px_400px_at_20%_80%,rgba(19,47,84,0.45),transparent_60%)]" />
+      <div ref={fieldRef} className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <HeroField />
+      </div>
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(5,7,11,0.12),rgba(5,7,11,0.35)_40%,rgba(5,7,11,0.92))]" />
+
+      <div className="shell relative z-10 flex min-h-[92svh] flex-col justify-end pb-14 pt-28 sm:pb-18 lg:pb-20">
+        <div className="max-w-5xl">
+          <motion.span
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+            className="eyebrow text-lime"
+          >
+            <span className="h-px w-8 bg-lime/80" aria-hidden="true" />
+            Ideas. Websites. Real Impact.
+          </motion.span>
+
+          <h1 className="mt-6 font-heading text-balance text-[clamp(2.8rem,8.5vw,7.6rem)] font-bold leading-[0.88] tracking-[-0.055em] text-paper">
+            <SplitTextHeading as="span" splitType="words" delay={0.055} duration={0.75} trigger={false} className="block">
+              Digital work
+            </SplitTextHeading>
+            <SplitTextHeading
+              as="span"
+              splitType="words"
+              delay={0.055}
+              duration={0.75}
+              trigger={false}
+              className="block text-mist"
             >
-              {[
-                { text: "Digital experiences,", className: "text-paper" },
-                { text: "built around", className: "text-paper" },
-                { text: "your next idea.", className: "text-lime" },
-              ].map((line) => (
-                <span key={line.text} className="block overflow-hidden pb-[0.04em]" aria-hidden="true">
-                  <motion.span
-                    className={`block ${line.className}`}
-                    variants={{
-                      hidden: { y: "110%", opacity: 0 },
-                      visible: {
-                        y: "0%",
-                        opacity: 1,
-                        transition: { duration: 0.58, ease: [0.22, 1, 0.36, 1] },
-                      },
-                    }}
-                  >
-                    {line.text === "your next idea." ? <GlyphLotteryText text={line.text} /> : line.text}
-                  </motion.span>
-                </span>
-              ))}
-            </motion.h1>
-            <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-mist sm:text-lg">
-              From business websites and online shops to portfolios, creator link pages, clubs, and event sites, we build around the people and purpose behind each idea.
-            </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+              crafted with
+            </SplitTextHeading>
+            <SplitTextHeading
+              as="span"
+              splitType="words"
+              delay={0.055}
+              duration={0.75}
+              trigger={false}
+              className="block text-lime"
+            >
+              intent.
+            </SplitTextHeading>
+          </h1>
+
+          <motion.p
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.52, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-7 max-w-2xl text-[1.05rem] leading-relaxed text-mist sm:text-[1.15rem]"
+          >
+            We design and build distinctive websites for businesses, creators, communities, events, and individuals - clear
+            in purpose, considered in detail, and ready to perform.
+          </motion.p>
+
+          <motion.div
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.66, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
+          >
+            <Magnetic>
               <CTA to="/contact" icon={<ArrowRight className="h-4 w-4" aria-hidden="true" />}>
                 Start a Project
               </CTA>
-              <CTA to="/work" variant="outlineDark">
-                Explore Our Work
-              </CTA>
-            </div>
-
-            <ul className="mt-10 grid grid-cols-2 gap-x-5 gap-y-3 border-t border-white/10 pt-6 sm:grid-cols-3">
-              {heroServices.map((service) => (
-                <li key={service.label} className="flex items-center gap-2 text-[12px] text-mist">
-                  <ServiceIcon name={service.icon} className="h-4 w-4 text-lime" />
-                  {service.label}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <HeroVisual />
+            </Magnetic>
+            <CTA to="/work" variant="outlineDark" icon={<ArrowUpRight className="h-4 w-4" aria-hidden="true" />}>
+              Explore Concept Work
+            </CTA>
+          </motion.div>
         </div>
+
+        <motion.ul
+          initial={prefersReducedMotion ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.85 }}
+          className="mt-12 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-white/10 pt-6 text-[12px] text-mist/90 sm:grid-cols-3 lg:max-w-4xl lg:grid-cols-6"
+          aria-label="Services at a glance"
+        >
+          {heroServices.map((service) => (
+            <li key={service.label} className="truncate">
+              {service.label}
+            </li>
+          ))}
+        </motion.ul>
+      </div>
+
+      <div
+        aria-hidden="true"
+        className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-mist/60 lg:flex"
+      >
+        <span className="font-mono text-[10px] uppercase tracking-[0.3em]">Scroll</span>
+        <span className="h-10 w-px bg-gradient-to-b from-lime/70 to-transparent" />
       </div>
     </section>
   );

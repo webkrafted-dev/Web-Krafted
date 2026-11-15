@@ -8,9 +8,9 @@ import { AuthProvider, useAuth } from "@/lib/AuthContext";
 import ScrollToTop from "@/components/ScrollToTop";
 import SiteLayout from "@/components/SiteLayout";
 import ProtectedRoute from "@/components/ProtectedRoute";
-import Home from "@/pages/Home";
 import NotFound from "@/pages/NotFound";
 
+const Home = lazy(() => import("@/pages/Home"));
 const Work = lazy(() => import("@/pages/Work"));
 const CaseStudy = lazy(() => import("@/pages/CaseStudy"));
 const Services = lazy(() => import("@/pages/Services"));
@@ -34,7 +34,7 @@ function RoutePage({ page: Page }) {
     <Suspense
       fallback={(
         <div className="section" role="status">
-          <div className="shell text-sm text-charcoal/60">Loading page…</div>
+          <div className="shell text-sm text-mist">Loading page…</div>
         </div>
       )}
     >
@@ -57,7 +57,7 @@ function AuthenticatedApp() {
   return (
     <Routes>
       <Route element={<SiteLayout />}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<RoutePage page={Home} />} />
         <Route path="/work" element={<RoutePage page={Work} />} />
         <Route path="/work/:slug" element={<RoutePage page={CaseStudy} />} />
         <Route path="/services" element={<RoutePage page={Services} />} />

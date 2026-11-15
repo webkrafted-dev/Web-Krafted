@@ -6,46 +6,70 @@ import ServiceIcon from "@/components/ServiceIcon";
 import { services } from "@/data/services";
 
 export default function ServicesGrid() {
+  const handlePointerMove = (e) => {
+    const el = e.currentTarget;
+    const rect = el.getBoundingClientRect();
+    el.style.setProperty("--sx", `${e.clientX - rect.left}px`);
+    el.style.setProperty("--sy", `${e.clientY - rect.top}px`);
+  };
+
   return (
-    <section className="section bg-paper">
+    <section className="section relative bg-paper text-navy">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-navy/15 to-transparent"
+      />
       <div className="shell">
-        <div className="flex flex-wrap items-end justify-between gap-6">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading
+            tone="light"
             eyebrow="Services"
-            title="What would you like to put online?"
-            description="Business websites remain a big part of our work—alongside personal portfolios, creator link pages, clubs, community and event sites, leisure projects, online shops, and custom apps."
+            title="What do you want to put into the world?"
+            description="From focused landing pages and business sites to portfolios, creator hubs, community spaces, shops, and custom web apps — each build is shaped around purpose, audience, and clarity."
           />
-          <Link
-            to="/services"
-            className="inline-flex items-center gap-1.5 border-b border-navy/20 pb-1 font-heading text-sm font-semibold text-navy transition-colors hover:border-navy"
-          >
-            Explore services
-            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          <Link to="/services" className="motion-cta inline-flex items-center gap-2 font-heading text-sm font-semibold text-navy">
+            Explore all services <ArrowUpRight className="motion-arrow h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-12">
           {services.map((service, index) => (
-            <Reveal key={service.slug} delay={index * 0.04} className="h-full">
+            <Reveal key={service.slug} delay={index * 0.04} className={index < 3 ? "lg:col-span-4" : "lg:col-span-4"}>
               <Link
                 to={`/services#${service.slug}`}
-                className="motion-lift group relative flex h-full flex-col overflow-hidden rounded-xl border border-mist/80 bg-white p-6 shadow-[0_12px_34px_-32px_rgba(11,31,59,0.65)] transition-all duration-300 hover:-translate-y-1 hover:border-navy/25 hover:shadow-[0_22px_48px_-34px_rgba(11,31,59,0.55)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lime-deep focus-visible:ring-offset-2"
+                onPointerMove={handlePointerMove}
+                className="group relative flex h-full min-h-[220px] flex-col overflow-hidden rounded-[1.25rem] border border-navy/10 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-navy/20 hover:shadow-[0_30px_70px_-45px_rgba(11,31,59,0.5)]"
               >
-                <span aria-hidden="true" className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-lime transition-transform duration-300 group-hover:scale-x-100 group-focus-visible:scale-x-100" />
-                <div className="flex items-start justify-between">
-                  <span className="grid h-12 w-12 place-items-center rounded-xl border border-lime/15 bg-navy text-lime shadow-[0_8px_18px_-12px_rgba(11,31,59,0.8)]">
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-lime-deep transition-transform duration-500 group-hover:scale-x-100"
+                />
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  style={{
+                    background:
+                      "radial-gradient(320px circle at var(--sx, 50%) var(--sy, 50%), rgba(184,255,59,0.18), transparent 55%)",
+                  }}
+                />
+                <div
+                  className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-lime/10 blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  aria-hidden="true"
+                />
+                <div className="relative flex items-start justify-between gap-4">
+                  <span className="grid h-12 w-12 place-items-center rounded-xl bg-navy text-lime ring-1 ring-navy/10">
                     <ServiceIcon name={service.icon} />
                   </span>
-                  <span className="font-heading text-[11px] font-semibold tracking-[0.16em] text-charcoal/35">
+                  <span className="font-mono text-[10px] tracking-[0.2em] text-charcoal/40">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                 </div>
-                <h3 className="mt-5 font-heading text-lg font-semibold leading-snug tracking-tight text-navy transition-colors group-hover:text-navy-soft">
+                <h3 className="relative mt-6 font-heading text-xl font-semibold leading-tight tracking-[-0.02em] text-navy">
                   {service.title}
                 </h3>
-                <p className="mt-2 flex-1 text-[15px] leading-relaxed text-charcoal/75">{service.oneLine}</p>
-                <span className="mt-5 inline-flex items-center gap-1.5 font-heading text-[13px] font-semibold text-navy">
-                  Learn more
+                <p className="relative mt-3 flex-1 text-[15px] leading-relaxed text-charcoal/75">{service.oneLine}</p>
+                <span className="relative mt-6 inline-flex items-center gap-1.5 font-heading text-[13px] font-semibold text-navy">
+                  Learn more{" "}
                   <ArrowUpRight
                     className="h-4 w-4 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                     aria-hidden="true"

@@ -5,48 +5,37 @@ import PricingSection from "@/components/services/PricingSection";
 import PricingFaq from "@/components/services/PricingFaq";
 import FinalCta from "@/components/home/FinalCta";
 import { services } from "@/data/services";
+import Reveal from "@/components/Reveal";
 
 export default function Services() {
   usePageMeta(
-    "Services & pricing — WK Web Krafted Studios",
-    "Business websites, personal portfolios, creator link pages, community and event sites, e-commerce, web apps, and ongoing care. Clear launch pricing for different project types."
+    "Services — WK Web Krafted Studios",
+    "Website design and development for businesses, portfolios, creators, communities, events, e-commerce, and custom web apps. Clear scope and considered delivery."
   );
 
   return (
     <>
       <PageHeader
         eyebrow="Services"
-        title="Websites for businesses, personal projects, and everything between"
-        description="Business websites remain a key part of our work. We also build personal portfolios, creator link pages, club and community sites, event and leisure pages, shops, and custom web apps—shaped around each project's purpose and audience."
+        title="Websites shaped around purpose"
+        description="Business websites, landing pages, portfolios, creator pages, community and event sites, shops, and custom web apps — planned and built around what each audience needs to understand and do."
       />
 
-      <div className="bg-paper">
+      <div className="bg-paper text-navy">
         <div className="shell">
-          <div className="grid gap-6 border-b border-mist/80 py-10 sm:grid-cols-3 lg:py-12">
-            <div>
-              <h2 className="font-heading text-[11px] font-semibold uppercase tracking-[0.18em] text-charcoal/50">
-                In plain language
-              </h2>
-              <p className="mt-2 text-[14.5px] leading-relaxed text-charcoal/75">
-                We plan, design, and build websites — then help you look after them.
-              </p>
-            </div>
-            <div>
-              <h2 className="font-heading text-[11px] font-semibold uppercase tracking-[0.18em] text-charcoal/50">
-                How it starts
-              </h2>
-              <p className="mt-2 text-[14.5px] leading-relaxed text-charcoal/75">
-                A short conversation, a clear written scope, and a timeline you can plan around.
-              </p>
-            </div>
-            <div>
-              <h2 className="font-heading text-[11px] font-semibold uppercase tracking-[0.18em] text-charcoal/50">
-                What you get
-              </h2>
-              <p className="mt-2 text-[14.5px] leading-relaxed text-charcoal/75">
-                A responsive site that works on every device, with the accounts and files in your hands.
-              </p>
-            </div>
+          <div className="grid gap-6 border-b border-navy/10 py-12 sm:grid-cols-3">
+            {[
+              { title: "In plain language", text: "We plan, design, and build websites — then help you look after them." },
+              { title: "How it starts", text: "A short conversation, a clear written scope, and a timeline you can plan around." },
+              { title: "What you get", text: "A responsive site that works on every device, with accounts and files in your hands." },
+            ].map((item, i) => (
+              <Reveal key={item.title} delay={i * 0.05}>
+                <div>
+                  <h2 className="font-heading text-[11px] font-semibold uppercase tracking-[0.18em] text-charcoal/50">{item.title}</h2>
+                  <p className="mt-2 text-[15px] leading-relaxed text-charcoal/75">{item.text}</p>
+                </div>
+              </Reveal>
+            ))}
           </div>
 
           {services.map((service, index) => (

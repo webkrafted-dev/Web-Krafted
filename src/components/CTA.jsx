@@ -1,16 +1,15 @@
 import { Link } from "react-router-dom";
 
 const styles = {
-  primary:
-    "bg-lime text-navy hover:bg-lime-deep hover:-translate-y-0.5 shadow-[0_10px_24px_-14px_rgba(11,31,59,0.55)]",
-  outlineDark: "border border-mist/40 text-paper hover:border-lime hover:text-lime",
-  outlineLight: "border border-navy/20 text-navy hover:border-navy hover:bg-navy hover:text-paper",
+  primary: "bg-lime text-navy hover:bg-[#c9ff66] shadow-glow border border-lime/40",
+  outlineDark: "border border-white/20 text-paper hover:border-lime/70 hover:text-lime bg-white/[0.02]",
+  outlineLight: "border border-navy/15 text-navy hover:border-navy hover:bg-navy hover:text-paper bg-white",
   link: "text-navy underline decoration-lime decoration-2 underline-offset-4 hover:decoration-navy",
   linkDark: "text-paper underline decoration-lime decoration-2 underline-offset-4 hover:decoration-paper",
 };
 
 const base =
-  "motion-cta inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 font-heading text-sm font-semibold transition-all duration-200 disabled:opacity-60 disabled:pointer-events-none";
+  "motion-cta group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-heading text-sm font-semibold tracking-[0.01em] transition-all duration-300 disabled:pointer-events-none disabled:opacity-60";
 
 export default function CTA({
   to,

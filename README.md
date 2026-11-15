@@ -38,7 +38,23 @@ Row Level Security policies in the schema permit public reads of published posts
 4. Set the production site URL in Supabase Auth's allowed redirect URLs. Add your Vercel preview URLs if you use preview deployments.
 5. Deploy. Vercel serves the frontend and `/api/submit-enquiry`, `/api/submit-message`, and the admin-only `/api/send-reply`; Supabase stores contact submissions and published posts.
 
-Email notifications and admin replies require `RESEND_API_KEY` (secret) and `RESEND_FROM_EMAIL` (a sender verified with Resend) in Vercel. `NOTIFICATION_EMAIL` is an optional comma-separated override; if empty, the server resolves recipient addresses from accounts listed in `public.admins`. New enquiries and quick messages are stored for the `/admin` inbox before email notification is attempted. The admin inbox can send a manual reply to a selected submission and use the signed-in admin's email as the reply-to address. Submissions remain saved to Supabase if email delivery is unavailable.
+Email notifications and admin replies use Resend. Configure these server-only variables:
+
+- `NOTIFICATION_EMAIL` — optional comma-separated recipient override; this repository's example sets it to `wkrafted@gmail.com`. If empty, recipients are resolved from accounts listed in `public.admins`.
+- `RESEND_API_KEY` — API key from Resend; keep it secret and never expose it with a `VITE_` prefix.
+- `RESEND_FROM_EMAIL` — the exact sender address Resend lists as verified for your domain.
+
+New enquiries and quick messages are stored in Supabase before an owner notification is attempted. If Resend is unavailable or not configured, the submission still succeeds and remains in the admin inbox; the email is not delivered. The admin inbox can also send a manual reply to the selected submission; the signed-in admin's email is used as the reply-to address.
+
+### Configure Resend after obtaining a domain
+
+1. Add your domain in Resend and publish the DNS records Resend provides at your domain registrar. Wait until Resend reports the domain as verified.
+2. Use a sender address on that verified domain and set `RESEND_FROM_EMAIL` to the exact address Resend accepts. Do not set this value to an unverified or placeholder address.
+3. Create a Resend API key and configure it as the secret `RESEND_API_KEY` in the Vercel project that serves `web-krafted.vercel.app`.
+4. Configure `NOTIFICATION_EMAIL` as `wkrafted@gmail.com` in that same project. Add these email variables to the desired Vercel environments; leave existing Supabase variables unchanged.
+5. For local API testing, add the email variables to `.env.local` and run `vercel dev` (plain `npm run dev` runs Vite and does not serve the Vercel API functions). Local submissions also require the Supabase server variables above.
+
+No email sender or Resend credentials are included in this repository. Configure a verified sender and the Resend API key in the Vercel project before expecting email delivery. Vercel environment changes take effect after a new deployment.
 
 Vercel's CDN serves the site globally. Supabase keeps the durable database in the region selected for the project; database backup and retention options depend on the Supabase plan.
 

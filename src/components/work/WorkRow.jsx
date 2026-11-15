@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import ConceptBadge from "@/components/ConceptBadge";
 import BrowserMockup from "@/components/BrowserMockup";
+import Reveal from "@/components/Reveal";
 
 export default function WorkRow({ project, index }) {
   const reversed = index % 2 === 1;
@@ -12,40 +13,47 @@ export default function WorkRow({ project, index }) {
           reversed ? "lg:[&>*:first-child]:order-2" : ""
         }`}
       >
-        <BrowserMockup
-          variant={project.mockup}
-          label={`Abstract layout preview for the ${project.name} concept project`}
-        />
+        <Reveal x={reversed ? 18 : -18} y={8} className="min-w-0">
+          <BrowserMockup
+            variant={project.mockup}
+            label={`Abstract layout preview for the ${project.name} concept project`}
+          />
+        </Reveal>
 
-        <div>
-          <div className="flex flex-wrap items-center gap-2.5">
-            <ConceptBadge tone="light" />
-            <span className="font-heading text-[10px] font-semibold uppercase tracking-[0.16em] text-charcoal/55">
-              {project.category}
-            </span>
+        <Reveal x={reversed ? -18 : 18} y={8} delay={0.07} className="min-w-0">
+          <div>
+            <p className="mb-3 font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-charcoal/40">
+              Project {String(index + 1).padStart(2, "0")}
+            </p>
+            <div className="flex flex-wrap items-center gap-2.5">
+              <ConceptBadge tone="light" />
+              <span className="font-heading text-[10px] font-semibold uppercase tracking-[0.16em] text-charcoal/55">
+                {project.category}
+              </span>
+            </div>
+            <h2 className="mt-4 font-heading text-2xl font-bold tracking-[-0.02em] text-navy sm:text-[1.9rem]">
+              {project.name}
+            </h2>
+            <p className="mt-3 max-w-lg text-[15.5px] leading-relaxed text-charcoal/75">{project.summary}</p>
+
+            <ul className="mt-5 grid gap-1.5 sm:grid-cols-2">
+              {project.features.map((feature) => (
+                <li key={feature} className="flex gap-2 text-[13.5px] leading-relaxed text-charcoal/70">
+                  <span className="mt-[9px] h-1 w-1 shrink-0 rounded-full bg-lime-deep" aria-hidden="true" />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+
+            <Link
+              to={`/work/${project.slug}`}
+              className="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-navy/20 px-5 py-3 font-heading text-[13px] font-semibold text-navy transition-colors hover:border-navy hover:bg-navy hover:text-paper"
+            >
+              View case study
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
           </div>
-          <h2 className="mt-4 font-heading text-2xl font-bold tracking-[-0.02em] text-navy sm:text-[1.9rem]">
-            {project.name}
-          </h2>
-          <p className="mt-3 max-w-lg text-[15.5px] leading-relaxed text-charcoal/75">{project.summary}</p>
-
-          <ul className="mt-5 grid gap-1.5 sm:grid-cols-2">
-            {project.features.map((feature) => (
-              <li key={feature} className="flex gap-2 text-[13.5px] leading-relaxed text-charcoal/70">
-                <span className="mt-[9px] h-1 w-1 shrink-0 rounded-full bg-lime-deep" aria-hidden="true" />
-                {feature}
-              </li>
-            ))}
-          </ul>
-
-          <Link
-            to={`/work/${project.slug}`}
-            className="mt-6 inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-navy/20 px-5 py-3 font-heading text-[13px] font-semibold text-navy transition-colors hover:border-navy hover:bg-navy hover:text-paper"
-          >
-            View case study
-            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
-        </div>
+        </Reveal>
       </div>
     </article>
   );

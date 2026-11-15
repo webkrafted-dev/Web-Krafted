@@ -38,15 +38,15 @@ const faqs = [
 
 export default function PricingFaq() {
   return (
-    <section className="bg-paper pb-16 sm:pb-20">
+    <section className="bg-paper pb-16 text-navy sm:pb-20">
       <div className="shell">
         <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr] lg:gap-14">
           <div>
             <span className="eyebrow text-charcoal/60">
-              <span className="h-px w-6 bg-lime" aria-hidden="true" />
+              <span className="h-px w-6 bg-lime-deep" aria-hidden="true" />
               Questions
             </span>
-            <h2 className="mt-4 font-heading text-3xl font-bold tracking-[-0.02em] text-navy">
+            <h2 className="mt-4 font-heading text-3xl font-bold tracking-[-0.03em] text-navy">
               Common questions
             </h2>
             <p className="mt-3 text-[15px] leading-relaxed text-charcoal/70">
@@ -56,11 +56,11 @@ export default function PricingFaq() {
 
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
-              <AccordionItem key={faq.q} value={`item-${index}`} className="border-b border-mist/80">
-                <AccordionTrigger className="py-4 text-left font-heading text-[15px] font-semibold text-navy transition-colors hover:text-navy-soft hover:no-underline">
+              <AccordionItem key={faq.q} value={`item-${index}`} className="border-b border-navy/10">
+                <AccordionTrigger className="py-5 text-left font-heading text-[15px] font-semibold text-navy transition-colors hover:text-navy-soft hover:no-underline">
                   {faq.q}
                 </AccordionTrigger>
-                <AccordionContent className="pb-4 text-[14.5px] leading-relaxed text-charcoal/75">
+                <AccordionContent className="pb-5 text-[14.5px] leading-relaxed text-charcoal/75">
                   {faq.a}
                 </AccordionContent>
               </AccordionItem>

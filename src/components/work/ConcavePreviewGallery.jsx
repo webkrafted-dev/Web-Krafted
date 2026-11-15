@@ -20,14 +20,12 @@ export default function ConcavePreviewGallery() {
   useLayoutEffect(() => {
     const stage = stageRef.current;
     if (!stage) return undefined;
-
     const measure = () => setStageWidth(stage.getBoundingClientRect().width);
     measure();
     if (typeof ResizeObserver === "undefined") {
       window.addEventListener("resize", measure);
       return () => window.removeEventListener("resize", measure);
     }
-
     const observer = new ResizeObserver(measure);
     observer.observe(stage);
     return () => observer.disconnect();
@@ -69,25 +67,24 @@ export default function ConcavePreviewGallery() {
     [move]
   );
 
-  const cardWidth = stageWidth
-    ? Math.min(stageWidth * (stageWidth < 640 ? 0.84 : 0.73), 700)
-    : 520;
-  const cardStep = cardWidth * 0.68;
-  const spring = prefersReducedMotion
-    ? { duration: 0 }
-    : { type: "spring", stiffness: 88, damping: 18, mass: 0.82 };
+  const cardWidth = stageWidth ? Math.min(stageWidth * (stageWidth < 640 ? 0.88 : 0.62), 640) : 480;
+  const cardStep = cardWidth * 0.72;
+  const spring = prefersReducedMotion ? { duration: 0 } : { type: "spring", stiffness: 88, damping: 18, mass: 0.82 };
 
   return (
-    <section className="mt-16 sm:mt-20" aria-labelledby="concept-gallery-title">
+    <section className="mt-12 sm:mt-16" aria-labelledby="concept-gallery-title">
       <div className="mb-5 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="eyebrow text-navy/60">One studio · Many contexts</p>
+          <p className="eyebrow text-navy/60">
+            <span className="h-px w-7 bg-lime-deep" aria-hidden="true" />
+            Featured previews
+          </p>
           <h2 id="concept-gallery-title" className="mt-3 font-heading text-2xl font-semibold leading-tight text-navy sm:text-3xl">
             Explore a range of ideas.
           </h2>
         </div>
         <p className="max-w-md text-[14px] leading-relaxed text-charcoal/70">
-          Business, creator, portfolio, club, and community-event websites — each preview is a real page built for a different audience.
+          Business, creator, portfolio, club, and community-event websites. Each preview is a designed concept for a different audience.
         </p>
       </div>
 
@@ -101,10 +98,14 @@ export default function ConcavePreviewGallery() {
         onPointerDown={handlePointerDown}
         onPointerUp={handlePointerUp}
         onPointerCancel={handlePointerUp}
-        className="relative h-[390px] overflow-hidden rounded-2xl bg-[#e8edf2] outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-4 sm:h-[520px] lg:h-[640px]"
+        className="relative h-[320px] overflow-hidden rounded-[1.5rem] border border-navy/10 bg-[#e8edf2] outline-none focus-visible:ring-2 focus-visible:ring-lime focus-visible:ring-offset-4 sm:h-[420px] lg:h-[520px]"
         style={{ perspective: "1600px", touchAction: "pan-y" }}
       >
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-70" style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(255,255,255,.9), transparent 67%)" }} />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-70"
+          style={{ background: "radial-gradient(ellipse at 50% 50%, rgba(255,255,255,.9), transparent 67%)" }}
+        />
         {conceptCarousel.map((project, index) => {
           const offset = relativeOffset(index, activeIndex, conceptCarousel.length);
           const distance = Math.abs(offset);
@@ -140,28 +141,22 @@ export default function ConcavePreviewGallery() {
                   if (!centered) setActiveIndex(index);
                 }}
                 className={`overflow-hidden rounded-xl border bg-white ${centered ? "border-white shadow-[0_28px_70px_rgba(11,31,59,0.24)]" : "border-white/70 shadow-[0_18px_45px_rgba(11,31,59,0.18)]"}`}
-                style={{
-                  width: cardWidth,
-                  transformStyle: "preserve-3d",
-                  transformPerspective: 1600,
-                  cursor: centered ? "default" : "pointer",
-                }}
+                style={{ width: cardWidth, transformStyle: "preserve-3d", transformPerspective: 1600, cursor: centered ? "default" : "pointer" }}
               >
                 <img
                   src={project.src}
                   alt={centered ? project.alt : ""}
                   draggable="false"
                   loading={distance > 1 ? "lazy" : "eager"}
-                  className="block w-full select-none bg-[#e6ebf0] object-contain"
-                  style={{ aspectRatio: "1.28" }}
+                  className="block w-full select-none bg-[#e6ebf0] object-cover"
+                  style={{ aspectRatio: "16 / 10" }}
                 />
                 {centered && (
-                <figcaption className="flex min-h-[82px] items-center justify-between gap-3 border-t border-navy/10 px-4 py-3 sm:px-5">
-                  <div className="min-w-0">
-                    <p className="truncate font-heading text-[15px] font-semibold leading-tight text-navy sm:text-base">{project.title}</p>
-                    <p className="mt-1 truncate text-[11px] font-medium text-charcoal/65 sm:text-xs">{project.subtitle}</p>
-                  </div>
-                  {centered && (
+                  <figcaption className="flex min-h-[82px] items-center justify-between gap-3 border-t border-navy/10 px-4 py-3 sm:px-5">
+                    <div className="min-w-0">
+                      <p className="truncate font-heading text-[15px] font-semibold leading-tight text-navy sm:text-base">{project.title}</p>
+                      <p className="mt-1 truncate text-[11px] font-medium text-charcoal/65 sm:text-xs">{project.subtitle}</p>
+                    </div>
                     <Link
                       to={project.href}
                       className="motion-cta inline-flex shrink-0 items-center gap-1.5 rounded-md bg-navy px-3 py-2 text-[11px] font-semibold text-paper hover:bg-[#18395c] focus-visible:outline-lime sm:text-xs"
@@ -170,8 +165,7 @@ export default function ConcavePreviewGallery() {
                     >
                       View concept <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                     </Link>
-                  )}
-                </figcaption>
+                  </figcaption>
                 )}
               </motion.figure>
             </div>
@@ -180,7 +174,10 @@ export default function ConcavePreviewGallery() {
         <span className="sr-only" aria-live="polite" aria-atomic="true">
           {activeProject.title}, {activeIndex + 1} of {conceptCarousel.length}
         </span>
-        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-lime to-transparent opacity-80" />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-lime to-transparent opacity-80"
+        />
       </div>
 
       <div className="mt-5 flex flex-col gap-4 sm:mt-6 sm:flex-row sm:items-center sm:justify-between">
@@ -221,7 +218,9 @@ export default function ConcavePreviewGallery() {
           ))}
         </div>
       </div>
-      <p className="mt-3 text-center text-[11px] text-charcoal/55 sm:text-left">Swipe, drag, use the arrows, or press ← / → to browse.</p>
+      <p className="mt-3 text-center text-[11px] text-charcoal/55 sm:text-left">
+        Swipe, drag, use the arrows, or press left or right to browse.
+      </p>
     </section>
   );
 }
