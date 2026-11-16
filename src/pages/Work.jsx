@@ -3,7 +3,18 @@ import PageHeader from "@/components/PageHeader";
 import WorkRow from "@/components/work/WorkRow";
 import FinalCta from "@/components/home/FinalCta";
 import { projects } from "@/data/projects";
-import ConcavePreviewGallery from "@/components/work/ConcavePreviewGallery";
+import ChromaGrid from "@/components/ChromaGrid";
+import CircularProjectCarousel from "@/components/work/CircularProjectCarousel";
+import { conceptCarousel } from "@/data/conceptCarousel";
+
+const chromaItems = conceptCarousel.map((item) => ({
+  image: item.src,
+  alt: item.alt,
+  title: item.title,
+  subtitle: item.subtitle,
+  accent: item.accent,
+  url: item.href,
+}));
 
 export default function Work() {
   usePageMeta(
@@ -31,7 +42,44 @@ export default function Work() {
             </p>
           </div>
 
-          <ConcavePreviewGallery />
+          <CircularProjectCarousel />
+
+          <section className="mt-14 sm:mt-20" aria-labelledby="all-concepts-title">
+            <div className="mb-6 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="eyebrow text-navy/60">
+                  <span className="h-px w-7 bg-lime-deep" aria-hidden="true" />
+                  Browse all concepts
+                </p>
+                <h2 id="all-concepts-title" className="mt-3 font-heading text-2xl font-semibold leading-tight text-navy sm:text-3xl">
+                  Every project, at a glance.
+                </h2>
+              </div>
+              <p className="max-w-md text-[14px] leading-relaxed text-charcoal/70">
+                Move across a preview to reveal its colour, or select a project to open its case study.
+              </p>
+            </div>
+            <ChromaGrid
+              items={chromaItems}
+              columns={3}
+              minCardWidth={180}
+              gap={12}
+              radius={260}
+              reveal="spotlight"
+              aspectRatio="3 / 2"
+              cardRadius={22}
+              showInfo
+              frame={false}
+              softness={0.6}
+              damping={0.45}
+              fadeOut={0.6}
+              grayscale={1}
+              dim={0.12}
+              glow={0.5}
+              borderGlow={1}
+              theme="light"
+            />
+          </section>
 
           {projects.map((project, index) => (
             <WorkRow key={project.slug} project={project} index={index} />

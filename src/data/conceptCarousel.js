@@ -4,6 +4,7 @@ export const conceptCarousel = [
     alt: "Ember & Oak fictional restaurant website preview with menu, reservation action, and food photography",
     title: "Ember & Oak",
     subtitle: "Food & Hospitality",
+    accent: "#d98a55",
     href: "/work/ember-and-oak",
   },
   {
@@ -11,6 +12,7 @@ export const conceptCarousel = [
     alt: "Lena Rowe fictional creator portfolio website preview with editorial photography, selected work, and enquiry action",
     title: "Lena Rowe Photography",
     subtitle: "Creator · Photography portfolio",
+    accent: "#d59b82",
     href: "/work/lena-rowe-portfolio",
   },
   {
@@ -18,6 +20,7 @@ export const conceptCarousel = [
     alt: "Summit Sports Academy fictional community club website preview with fixtures, teams, and registration action",
     title: "Summit Sports Academy",
     subtitle: "Community · Sports club",
+    accent: "#8fd400",
     href: "/work/summit-sports-academy",
   },
   {
@@ -25,6 +28,7 @@ export const conceptCarousel = [
     alt: "Fieldnote Market fictional community events website preview with market dates, local makers, and visitor information",
     title: "Fieldnote Market",
     subtitle: "Community · Local events",
+    accent: "#e5b34b",
     href: "/work/fieldnote-market",
   },
   {
@@ -32,6 +36,7 @@ export const conceptCarousel = [
     alt: "Northline Consulting fictional professional services website preview with service messaging and enquiry action",
     title: "Northline Consulting",
     subtitle: "Professional services · Consulting",
+    accent: "#5ba8e8",
     href: "/work/northline-consulting",
   },
 ];

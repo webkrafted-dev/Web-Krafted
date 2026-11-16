@@ -1,4 +1,4 @@
-export default function PageHeader({ eyebrow, title, description, children, tone = "dark" }) {
+export default function PageHeader({ eyebrow, title, description, children = null, tone = "dark" }) {
   const dark = tone === "dark";
   const hasDetails = Boolean(description || children);
   return (

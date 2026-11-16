@@ -9,6 +9,7 @@ import WhyUs from "@/components/home/WhyUs";
 import PricingTeaser from "@/components/home/PricingTeaser";
 import InsightsPreview from "@/components/home/InsightsPreview";
 import FinalCta from "@/components/home/FinalCta";
+import TechText from "@/components/TechText";
 import Reveal from "@/components/Reveal";
 import { isSupabaseConfigured, supabase } from "@/lib/supabase";
 import { Link } from "react-router-dom";
@@ -78,6 +79,30 @@ export default function Home() {
               Explore concept work <ArrowUpRight className="motion-arrow h-4 w-4" aria-hidden="true" />
             </Link>
           </Reveal>
+        </div>
+        <div className="mt-10 h-40 overflow-hidden rounded-2xl border border-navy/10 bg-white/70 px-4 py-3 sm:mt-14 sm:h-52 sm:px-8 sm:py-5">
+          <TechText
+            text="Crafted with intent"
+            fontFamily="Syne, sans-serif"
+            fontWeight={700}
+            fontSize={150}
+            letterSpacing={-0.06}
+            color="rgba(11, 31, 59, 0.58)"
+            accentColor="#8fd400"
+            align="center"
+            reach={200}
+            softness={0.7}
+            reveal="letter"
+            specks={15}
+            speed={0.9}
+            intro="type"
+            introDuration={1.8}
+            clickKick
+            selection
+            draggable
+            sweep
+            style={{ width: "100%", height: "100%" }}
+          />
         </div>
       </section>
       <Process />

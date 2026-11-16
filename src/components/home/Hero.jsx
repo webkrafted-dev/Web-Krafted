@@ -5,12 +5,16 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import CTA from "@/components/CTA";
-import HeroField from "@/components/home/HeroField";
+import GradientASCII from "@/components/GradientASCII";
 import Magnetic from "@/components/Magnetic";
+import RotatingText from "@/components/RotatingText";
 import SplitTextHeading from "@/components/reactbits/SplitTextHeading";
 import { heroServices } from "@/data/services";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+const AUDIENCES = ["businesses", "creators", "communities", "events", "individuals"];
+const HERO_COLORS = ["#0b1f3b", "#132f54", "#b8ff3b"];
 
 export default function Hero() {
   const prefersReducedMotion = useReducedMotion();
@@ -39,7 +43,30 @@ export default function Hero() {
     <section ref={ref} className="relative isolate min-h-[92svh] overflow-hidden border-b border-white/10 bg-ink">
       <div className="absolute inset-0 bg-[radial-gradient(900px_500px_at_75%_20%,rgba(184,255,59,0.12),transparent_55%),radial-gradient(700px_400px_at_20%_80%,rgba(19,47,84,0.45),transparent_60%)]" />
       <div ref={fieldRef} className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-        <HeroField />
+        <GradientASCII
+          className="opacity-[0.35]"
+          colors={HERO_COLORS}
+          shape="horizon"
+          characters=" .:-=+*#@"
+          cellSize={17}
+          density={0.65}
+          glyphOpacity={0.38}
+          glow={0.18}
+          depthOfField={0}
+          flicker={0}
+          softness={0.55}
+          scale={1}
+          flow={0.2}
+          speed={0.3}
+          gradientOpacity={0.55}
+          grain={0.02}
+          variation={0}
+          mouseInteraction={false}
+          scrambleRadius={0.1}
+          clickEffect="none"
+          intro={false}
+          lightMode={false}
+        />
       </div>
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(5,7,11,0.12),rgba(5,7,11,0.35)_40%,rgba(5,7,11,0.92))]" />
 
@@ -81,14 +108,31 @@ export default function Hero() {
             </SplitTextHeading>
           </h1>
 
-          <motion.p
+          <motion.div
             initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.52, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-7 max-w-2xl text-[1.05rem] leading-relaxed text-mist sm:text-[1.15rem]"
+            className="mt-8 flex flex-wrap items-baseline gap-x-3 gap-y-2"
           >
-            We design and build distinctive websites for businesses, creators, communities, events, and individuals - clear
-            in purpose, considered in detail, and ready to perform.
+            <span className="font-heading text-lg font-medium text-mist sm:text-xl">Made for</span>
+            <RotatingText
+              texts={AUDIENCES}
+              effect="flip"
+              rotationInterval={2800}
+              auto={!prefersReducedMotion}
+              pauseOnHover
+              splitBy="words"
+              staggerDuration={0.012}
+              mainClassName="inline-flex align-baseline font-heading text-2xl font-semibold leading-none text-lime sm:text-4xl"
+            />{" "}
+          </motion.div>
+          <motion.p
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.62, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-4 max-w-2xl text-[1.05rem] leading-relaxed text-mist sm:text-[1.15rem]"
+          >
+            We build distinctive websites with clear purpose, considered detail, and room to grow.
           </motion.p>
 
           <motion.div

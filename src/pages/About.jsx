@@ -3,6 +3,8 @@ import PageHeader from "@/components/PageHeader";
 import SectionHeading from "@/components/SectionHeading";
 import FinalCta from "@/components/home/FinalCta";
 import Reveal from "@/components/Reveal";
+import ElectricLogo from "@/components/ElectricLogo";
+import { useReducedMotion } from "framer-motion";
 import { Compass, MessageSquare, ShieldCheck } from "lucide-react";
 
 const approach = [
@@ -19,6 +21,8 @@ const clientSteps = [
 ];
 
 export default function About() {
+  const prefersReducedMotion = useReducedMotion();
+
   usePageMeta(
     "About — WK Web Krafted Studios",
     "About WK Web Krafted Studios: a clear, collaborative approach to thoughtful website design and development."
@@ -53,7 +57,36 @@ export default function About() {
         <div className="shell grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <Reveal>
             <p className="eyebrow text-lime"><span className="h-px w-7 bg-lime/80" aria-hidden="true" />Working together</p>
-            <h2 className="mt-5 font-heading text-3xl font-bold leading-tight tracking-[-0.03em] text-paper sm:text-4xl">A process you can follow</h2>
+            <div className="mt-5 flex items-center gap-4">
+              <div className="relative h-20 w-20 shrink-0" aria-hidden="true">
+                <img src="/wk-mark-on-dark.png" alt="" className="absolute inset-4 h-12 w-12 object-contain" />
+                {!prefersReducedMotion && (
+                  <div className="absolute inset-0">
+                    <ElectricLogo
+                      src="/wk-mark-on-dark.png"
+                      color="#b8ff3b"
+                      glowColor="#8fd400"
+                      scale={0.58}
+                      strands={3}
+                      bend={0.45}
+                      crackle={0.8}
+                      arcs={1}
+                      speed={1}
+                      interactive
+                      intensity={0.7}
+                      glow={0.8}
+                      thickness={1.2}
+                      flicker={0.2}
+                      fill={0}
+                      cursorIntensity={0.5}
+                      cursorRadius={75}
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  </div>
+                )}
+              </div>
+              <h2 className="font-heading text-3xl font-bold leading-tight tracking-[-0.03em] text-paper sm:text-4xl">A process you can follow</h2>
+            </div>
             <p className="mt-4 text-[1rem] leading-relaxed text-mist">You will know what happens next, what is needed from you, and what is included before the project starts.</p>
           </Reveal>
           <ol className="divide-y divide-white/10 border-y border-white/10">
